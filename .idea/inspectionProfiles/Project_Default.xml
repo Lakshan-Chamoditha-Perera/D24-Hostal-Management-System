@@ -1,0 +1,18 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="MavenPackageUpdate" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="excludeList">
+        <list>
+          <option value="org.projectlombok:lombok" />
+          <option value="org.jvnet.staxex:stax-ex" />
+          <option value="org.jboss:jandex" />
+          <option value="org.jboss.logging:jboss-logging" />
+          <option value="org.glassfish.jaxb:txw2" />
+          <option value="org.glassfish.jaxb:jaxb-runtime" />
+          <option value="javax.xml.bind:jaxb-api" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
