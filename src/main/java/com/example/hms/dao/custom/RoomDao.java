@@ -1,4 +1,7 @@
 package com.example.hms.dao.custom;
 
-public interface RoomDao {
+import com.example.hms.dao.SuperDao;
+import com.example.hms.entity.Room;
+
+public interface RoomDao extends CrudDao<Room> {
 }

@@ -1,4 +1,6 @@
 package com.example.hms.dao.custom;
 
-public interface StudentDao {
+import com.example.hms.entity.*;
+
+public interface StudentDao extends CrudDao<Student> {
 }

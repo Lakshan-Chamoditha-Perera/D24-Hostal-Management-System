@@ -1,4 +1,7 @@
 package com.example.hms.dao.custom;
 
-public interface UserDao {
+import com.example.hms.dao.SuperDao;
+import com.example.hms.entity.User;
+
+public interface UserDao extends CrudDao <User> {
 }
