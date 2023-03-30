@@ -1,4 +1,7 @@
 package com.example.hms.service.custom;
 
-public interface ReservationService {
+import com.example.hms.entity.Reservation;
+import com.example.hms.service.SuperService;
+
+public interface ReservationService extends SuperService <Reservation> {
 }
