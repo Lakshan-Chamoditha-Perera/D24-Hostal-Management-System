@@ -3,6 +3,7 @@ package com.example.hms.service.custom.impl;
 import com.example.hms.dao.DaoFactory;
 import com.example.hms.dao.custom.RoomDao;
 import com.example.hms.dao.util.DaoTypes;
+import com.example.hms.dto.SuperDto;
 import com.example.hms.entity.Room;
 import com.example.hms.service.custom.RoomService;
 import org.hibernate.Session;
@@ -15,22 +16,22 @@ public class RoomServiceImpl implements RoomService {
         roomDao  = DaoFactory.getDaoFactory().getDao(DaoTypes.RoomDao);
     }
     @Override
-    public Boolean save(Room entity, Session session) {
+    public Boolean save(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Boolean update(Room entity, Session session) {
+    public Boolean update(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Boolean delete(Room entity, Session session) {
+    public Boolean delete(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Room view(Room entity, Session session) {
+    public SuperDto view(SuperDto dto, Session session) {
         return null;
     }
 

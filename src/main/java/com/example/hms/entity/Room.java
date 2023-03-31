@@ -19,7 +19,7 @@ import java.util.List;
 @ToString
 
 public class Room implements SuperEntity {
-
+    @ToString.Exclude
     @OneToMany(mappedBy = "room", targetEntity = Reservation.class)
     List<Reservation> reservationList = new ArrayList<>();
 

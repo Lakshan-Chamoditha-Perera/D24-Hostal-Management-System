@@ -15,6 +15,7 @@ public class UserImpl implements UserDao {
     public Boolean save(User entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
         try {
+            transaction.begin();
             session.save(entity);
             transaction.commit();
             return true;
@@ -30,6 +31,7 @@ public class UserImpl implements UserDao {
     public Boolean update(User entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
         try {
+            transaction.begin();
             session.update(entity);
             transaction.commit();
             return true;
@@ -45,6 +47,7 @@ public class UserImpl implements UserDao {
     public Boolean delete(User entity, Session session) throws  RuntimeException {
         Transaction transaction = session.getTransaction();
         try {
+            transaction.begin();
             session.delete(entity);
             transaction.commit();
             return true;

@@ -3,6 +3,7 @@ package com.example.hms.service.custom.impl;
 import com.example.hms.dao.DaoFactory;
 import com.example.hms.dao.custom.StudentDao;
 import com.example.hms.dao.util.DaoTypes;
+import com.example.hms.dto.SuperDto;
 import com.example.hms.entity.Student;
 import com.example.hms.service.custom.StudentService;
 import org.hibernate.Session;
@@ -17,22 +18,22 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean save(Student entity, Session session) {
+    public Boolean save(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Boolean update(Student entity, Session session) {
+    public Boolean update(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Boolean delete(Student entity, Session session) {
+    public Boolean delete(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Student view(Student entity, Session session) {
+    public SuperDto view(SuperDto dto, Session session) {
         return null;
     }
 

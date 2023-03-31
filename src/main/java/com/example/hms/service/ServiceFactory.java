@@ -17,7 +17,7 @@ public class ServiceFactory {
         return serviceFactory == null ? serviceFactory = new ServiceFactory() : serviceFactory;
     }
 
-    private <T extends SuperService> T getService(ServiceType type) throws ServiceNotFountException {
+    public  <T extends SuperService> T getService(ServiceType type) throws ServiceNotFountException {
         switch (type) {
             case StudentService:
                 return (T) new StudentServiceImpl();

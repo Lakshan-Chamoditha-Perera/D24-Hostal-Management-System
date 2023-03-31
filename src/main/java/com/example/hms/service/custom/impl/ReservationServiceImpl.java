@@ -3,6 +3,7 @@ package com.example.hms.service.custom.impl;
 import com.example.hms.dao.DaoFactory;
 import com.example.hms.dao.custom.ReservationDao;
 import com.example.hms.dao.util.DaoTypes;
+import com.example.hms.dto.SuperDto;
 import com.example.hms.entity.Reservation;
 import com.example.hms.service.custom.ReservationService;
 import org.hibernate.Session;
@@ -17,22 +18,23 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Boolean save(Reservation entity, Session session) {
+    public Boolean save(SuperDto dto, Session session) {
+
         return null;
     }
 
     @Override
-    public Boolean update(Reservation entity, Session session) {
+    public Boolean update(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Boolean delete(Reservation entity, Session session) {
+    public Boolean delete(SuperDto dto, Session session) {
         return null;
     }
 
     @Override
-    public Reservation view(Reservation entity, Session session) {
+    public SuperDto view(SuperDto dto, Session session) {
         return null;
     }
 

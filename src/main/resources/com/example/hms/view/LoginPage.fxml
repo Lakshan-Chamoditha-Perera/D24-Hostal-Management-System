@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="807.0" prefWidth="1311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.LoginFormController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2f7ccc" height="807.0" opacity="0.22" stroke="BLACK" strokeType="INSIDE" width="1311.0" />
+        <AnchorPane layoutX="94.0" layoutY="58.0" prefHeight="701.0" prefWidth="1105.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+            <children>
+                <Separator layoutX="575.0" layoutY="9.0" orientation="VERTICAL" prefHeight="672.0" prefWidth="20.0" />
+                <Label layoutX="615.0" layoutY="43.0" text="Welcome back :) ">
+                    <font>
+                        <Font size="47.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtId" layoutX="671.0" layoutY="275.0" prefHeight="41.0" prefWidth="308.0" promptText="user name" />
+                <PasswordField fx:id="txtPassword" layoutX="671.0" layoutY="343.0" prefHeight="41.0" prefWidth="308.0" promptText="password" />
+                <JFXButton fx:id="btnLogin" layoutX="671.0" layoutY="452.0" onAction="#btnLoginOnAction" prefHeight="41.0" prefWidth="308.0" style="-fx-background-color: #4649FF;" text="Login" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </JFXButton>
+                <Label layoutX="615.0" layoutY="149.0" prefHeight="26.0" prefWidth="343.0" text="Already have an account?">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Separator layoutX="671.0" layoutY="598.0" prefHeight="12.0" prefWidth="308.0" />
+                <Hyperlink layoutX="850.0" layoutY="420.0" text="Forgot password ?" />
+                <Label layoutX="671.0" layoutY="635.0" prefHeight="16.0" prefWidth="189.0" text="Or register as a user" />
+                <JFXButton fx:id="btnRegister" layoutX="868.0" layoutY="621.0" onAction="#btnRegisterOnAction" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #B0DAFF;" text="Register" textFill="#6b6b6b">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </JFXButton>
+                <Separator layoutX="671.0" layoutY="209.0" prefHeight="12.0" prefWidth="308.0" />
+                <Label layoutX="671.0" layoutY="230.0" prefHeight="26.0" prefWidth="108.0" text="Login">
+                    <font>
+                        <Font name="System Bold" size="26.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="267.0" fitWidth="284.0" layoutX="136.0" layoutY="122.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../assets/img_3.png" />
+                    </image>
+                </ImageView>
+            <Label layoutX="163.0" layoutY="393.0" prefHeight="78.0" prefWidth="336.0" text="Hostal ">
+               <font>
+                  <Font name="System Bold" size="51.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
