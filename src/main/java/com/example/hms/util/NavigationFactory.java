@@ -29,10 +29,13 @@ public class NavigationFactory {
                 init("LoginPage.fxml");
                 break;
 
-           /* case DASHBOARD:
-                stage.setTitle("Dashboard");
-                init("");
-                break;*/
+            case DASHBOARD:
+                init("Dashboard.fxml");
+                break;
+            case ROOM:
+                stage.setTitle("Manage Rooms");
+                init("RoomForm.fxml");
+                break;
 
             default:
                 throw new RuntimeException("Ui not Implemented!");
