@@ -17,6 +17,7 @@ public class StudentImpl implements StudentDao {
         try {
             session.save(entity);
             transaction.commit();
+            return true;
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
@@ -31,6 +32,7 @@ public class StudentImpl implements StudentDao {
         try {
             session.update(entity);
             transaction.commit();
+            return true;
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
@@ -45,6 +47,7 @@ public class StudentImpl implements StudentDao {
         try {
             session.delete(entity.getStudent_id());
             transaction.commit();
+            return true;
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
