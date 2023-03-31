@@ -16,15 +16,15 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Reservation implements SuperEntity{
-   @Id
-   private String res_id;
+public class Reservation implements SuperEntity {
+    @Id
+    private String res_id;
     private Date date;
+    private String status;
+
     @ManyToOne
     private Student student;
     @ManyToOne
     private Room room;
-    private String status;
-
 
 }

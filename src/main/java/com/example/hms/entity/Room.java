@@ -19,8 +19,10 @@ import java.util.List;
 @ToString
 
 public class Room implements SuperEntity {
-    @OneToMany
-    List<Reservation> list = new ArrayList<>();
+
+    @OneToMany(mappedBy = "room", targetEntity = Reservation.class)
+    List<Reservation> reservationList = new ArrayList<>();
+
     @Id
     private String room_type_id;
     private String type;

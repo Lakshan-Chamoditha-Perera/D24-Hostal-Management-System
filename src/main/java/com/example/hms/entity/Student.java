@@ -18,8 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public
-class Student implements SuperEntity {
+public class Student implements SuperEntity {
     private String name;
     private String address;
     private String contact_no;
@@ -27,7 +26,7 @@ class Student implements SuperEntity {
     private String gender;
     @Id
     private String student_id;
-    @OneToMany
-    private List<Reservation> list = new ArrayList<>();
+    @OneToMany(targetEntity = Reservation.class, mappedBy = "student")
+    private List<Reservation> reservationList = new ArrayList<>();
 }
 
