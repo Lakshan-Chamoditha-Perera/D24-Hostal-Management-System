@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane fx:id="mainPane" prefHeight="807.0" prefWidth="1311.0" style="-fx-background-color: #F1F6F5;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.hms.controller.DashboardController">
+    <children>
+        <ImageView fitHeight="807.0" fitWidth="1311.0" pickOnBounds="true">
+            <image>
+                <Image url="@../assets/img_5.png"/>
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="sidePane" layoutX="-37.0" layoutY="14.0" prefHeight="775.0" prefWidth="200.0"
+                    style="-fx-background-color: white; -fx-background-radius: 40;">
+            <children>
+                <JFXButton fx:id="btnLogout" layoutX="58.0" layoutY="635.0" onAction="#btnLogoutOnAction"
+                           prefHeight="124.0" prefWidth="127.0"
+                           style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <graphic>
+                        <ImageView fitHeight="72.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img_10.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="btnStudents" layoutX="58.0" layoutY="36.0" onAction="#btnStudentsOnAction"
+                           prefHeight="124.0" prefWidth="127.0"
+                           style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                    <graphic>
+                        <ImageView fitHeight="77.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img_6.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+                <JFXButton fx:id="btnRooms" layoutX="58.0" layoutY="191.0" onAction="#btnRoomsOnAction"
+                           prefHeight="124.0" prefWidth="127.0"
+                           style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                    <graphic>
+                        <ImageView fitHeight="77.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img_7.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+                <JFXButton fx:id="btnReservation" layoutX="58.0" layoutY="341.0" onAction="#btnReservationOnAction"
+                           prefHeight="124.0" prefWidth="127.0"
+                           style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                    <graphic>
+                        <ImageView fitHeight="77.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img_8.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+                <JFXButton fx:id="btnUser" layoutX="58.0" layoutY="489.0" onAction="#btnUserOnAction" prefHeight="124.0"
+                           prefWidth="127.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                    <graphic>
+                        <ImageView fitHeight="77.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img_9.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="pane" layoutX="202.0" layoutY="64.0" prefHeight="727.0" prefWidth="1089.0"
+                    style="-fx-background-color: white; -fx-background-radius: 40;"/>
+        <AnchorPane layoutX="922.0" layoutY="11.0" prefHeight="40.0" prefWidth="368.0"
+                    style="-fx-background-color: white; -fx-background-radius: 10;">
+            <children>
+                <Label fx:id="lblTime" layoutX="26.0" layoutY="12.0" prefHeight="16.0" prefWidth="114.0" text="Label"/>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

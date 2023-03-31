@@ -70,7 +70,9 @@ public class SignupPageController implements Initializable {
     }
 
     private boolean checkRegEx() throws RuntimeException {
-        return regExFactory.getPattern(RegExType.NAME).matcher(txtUsername.getText()).matches() && regExFactory.getPattern(RegExType.PASSWORD).matcher(txtPassword.getText()).matches() && regExFactory.getPattern(RegExType.PASSWORD).matcher(txtRptPassword.getText()).matches() && txtPassword.getText().equals(txtPasswordHint.getText());
+        return regExFactory.getPattern(RegExType.NAME).matcher(txtUsername.getText()).matches() &&
+                regExFactory.getPattern(RegExType.PASSWORD).matcher(txtPassword.getText()).matches() &&
+                txtPassword.getText().equals(txtRptPassword.getText());
     }
 
     @Override

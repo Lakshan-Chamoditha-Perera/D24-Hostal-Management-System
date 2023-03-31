@@ -19,7 +19,7 @@ public class RegExFactory {
 
 
     private RegExFactory() {
-        namePattern = Pattern.compile("^[a-zA-Z '.-]{4,}$");
+        namePattern = Pattern.compile("^[a-zA-Z0-9 '.-]{4,}$");
         registrationIdPattern = Pattern.compile("^[I][T][0-1]{1,}$");
         emailPattern = Pattern.compile("(^[a-zA-Z0-9_.-]+)@([a-zA-Z]+)([\\.])([a-zA-Z]+)$");
         cityPattern = Pattern.compile("[a-zA-Z]{4,}$");
