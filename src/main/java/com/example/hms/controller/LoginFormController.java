@@ -1,17 +1,17 @@
 package com.example.hms.controller;
 
+import com.example.hms.util.regex.RegExFactory;
+import com.example.hms.util.regex.RegExType;
 import com.jfoenix.controls.JFXButton;
-import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
 public class LoginFormController implements Initializable {
 
     public AnchorPane pane;
+    public Label lblPassword;
+    public RadioButton rBtnShowPassword;
     @FXML
     private TextField txtId;
 
@@ -36,7 +38,16 @@ public class LoginFormController implements Initializable {
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
+//        checkRegEx()
+        if (true) {
+            //  txtPassword.visibleProperty("");
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "Invalid Input!").show();
+        }
+    }
 
+    private boolean checkRegEx() throws RuntimeException {
+        return RegExFactory.getInstance().getPattern(RegExType.NAME).matcher(txtId.getText()).matches() && RegExFactory.getInstance().getPattern(RegExType.PASSWORD).matcher(txtPassword.getText()).matches();
     }
 
     @FXML
@@ -60,5 +71,14 @@ public class LoginFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void txtPasswordOnKeyReleased(KeyEvent keyEvent) {
+        rBtnOnMouseClicked();
+    }
+
+    public void rBtnOnMouseClicked() {
+        lblPassword.setText(txtPassword.getText());
+        lblPassword.setVisible(rBtnShowPassword.isSelected());
     }
 }
