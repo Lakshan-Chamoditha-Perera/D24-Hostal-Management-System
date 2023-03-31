@@ -12,7 +12,7 @@ import java.util.List;
 public class UserImpl implements UserDao {
 
     @Override
-    public Boolean save(User entity, Session session) {
+    public Boolean save(User entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
         try {
             session.save(entity);
@@ -27,7 +27,7 @@ public class UserImpl implements UserDao {
     }
 
     @Override
-    public Boolean update(User entity, Session session) {
+    public Boolean update(User entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
         try {
             session.update(entity);
@@ -42,7 +42,7 @@ public class UserImpl implements UserDao {
     }
 
     @Override
-    public Boolean delete(User entity, Session session) {
+    public Boolean delete(User entity, Session session) throws  RuntimeException {
         Transaction transaction = session.getTransaction();
         try {
             session.delete(entity);
