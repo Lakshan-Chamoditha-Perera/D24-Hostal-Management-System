@@ -46,7 +46,7 @@ public class UserImpl implements UserDao {
     @Override
     public Boolean delete(User entity, Session session) throws  RuntimeException {
         Transaction transaction = session.getTransaction();
-        try {
+        try (session) {
             transaction.begin();
             session.delete(entity);
             transaction.commit();
@@ -54,17 +54,13 @@ public class UserImpl implements UserDao {
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
-        } finally {
-            session.close();
         }
     }
 
     @Override
-    public User view(User entity, Session session) {
-        try {
+    public User view(User entity, Session session){
+        try (session) {
             return session.get(User.class, entity.getId());
-        } finally {
-            session.close();
         }
     }
 

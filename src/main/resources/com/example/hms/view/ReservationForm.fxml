@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="727.0" prefWidth="1089.0" style="-fx-background-radius: 40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.ReservationFormController">
+   <children>
+      <Label layoutX="59.0" layoutY="16.0" text="Manage Reservations" textFill="#112d4e">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblReservations" layoutX="29.0" layoutY="131.0" prefHeight="289.0" prefWidth="1023.0">
+        <columns>
+          <TableColumn fx:id="colReservationId" prefWidth="137.99996948242188" text="Reservation ID" />
+          <TableColumn fx:id="colStudentId" prefWidth="237.0" text="Student ID" />
+            <TableColumn fx:id="colDate" prefWidth="174.0" text="Date" />
+            <TableColumn fx:id="colRoomType" prefWidth="285.0" text="Room Type" />
+            <TableColumn fx:id="colStatus" prefWidth="188.0" text="Status" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtSearchByStudentId" layoutX="822.0" layoutY="93.0" onAction="#txtSearchByStudentIdOnAction" onKeyReleased="#txtSearchByStudentIdOnKeyReleased" prefHeight="26.0" prefWidth="228.0" promptText="Search By ID" />
+      <TableView fx:id="tblRoom" layoutX="29.0" layoutY="465.0" prefHeight="249.0" prefWidth="490.0">
+        <columns>
+          <TableColumn fx:id="colRoomID" prefWidth="109.99996948242188" text="Room ID" />
+          <TableColumn fx:id="colType" prefWidth="115.0" text="Type" />
+            <TableColumn fx:id="colKeyMoney" prefWidth="132.0" text="Key Money" />
+            <TableColumn fx:id="colQty" prefWidth="131.0" text="Qty" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btnAddReservation" layoutX="902.0" layoutY="14.0" onAction="#btnAddReservationOnAction" prefHeight="61.0" prefWidth="161.0" style="-fx-background-color: #47B5FF; -fx-background-radius: 20;" text="New Reservation" />
+      <Label layoutX="599.0" layoutY="465.0" prefHeight="26.0" prefWidth="333.0" text="Student Details" textFill="#112d4e">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="599.0" layoutY="534.0" text="Name" />
+      <Label layoutX="600.0" layoutY="570.0" text="Address" />
+      <Label layoutX="601.0" layoutY="611.0" text="Contact Number" />
+      <TextField fx:id="txtName" editable="false" layoutX="718.0" layoutY="521.0" prefHeight="26.0" prefWidth="235.0" />
+      <TextField fx:id="txtAddress" editable="false" layoutX="718.0" layoutY="563.0" prefHeight="26.0" prefWidth="235.0" />
+      <TextField fx:id="txtContactNumber" editable="false" layoutX="718.0" layoutY="604.0" prefHeight="26.0" prefWidth="235.0" />
+      <Label layoutX="602.0" layoutY="646.0" text="Gender" />
+      <TextField fx:id="txtGender" editable="false" layoutX="718.0" layoutY="641.0" prefHeight="26.0" prefWidth="235.0" />
+      <ButtonBar layoutX="736.0" layoutY="674.0" prefHeight="40.0" prefWidth="319.0">
+        <buttons>
+            <JFXButton fx:id="btnClear" onAction="#btnClearOnAction" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: #DFF6FF; -fx-background-radius: 10;" text="Clear" />
+        </buttons>
+      </ButtonBar>
+      <JFXButton fx:id="btnDelete" layoutX="953.0" layoutY="429.0" onAction="#btnDeleteOnAction" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: #06283D; -fx-background-radius: 10;" text="Delete" textFill="WHITE" />
+   </children>
+</AnchorPane>

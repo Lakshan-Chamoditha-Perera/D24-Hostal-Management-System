@@ -11,7 +11,7 @@ public class AppInitializer extends Application {
     public static void main(String[] args) {
         launch();
     }
-//    /home/shan/Documents/JavaFX/openjfx-19.0.2.1_linux-x64_bin-sdk/javafx-sdk-17.0.6/lib
+//    /home/shan/Documents/JavaFX/openjfx-19.0.2.1_linux-x64_bin-sdk/javafx-sdk-17.0.6/lib ----> fx lib location
 
     @Override
     public void start(Stage primaryStage) throws IOException {

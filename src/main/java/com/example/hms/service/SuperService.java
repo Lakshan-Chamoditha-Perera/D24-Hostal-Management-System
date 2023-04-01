@@ -13,7 +13,7 @@ public interface SuperService<T extends SuperDto> {
 
     Boolean delete(T entity, Session session);
 
-    T view(T entity, Session session);
+    T view(T entity, Session session) throws RuntimeException;
 
     List<T> getAll(Session session);
 }

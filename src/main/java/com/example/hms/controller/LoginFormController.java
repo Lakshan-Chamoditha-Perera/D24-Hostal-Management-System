@@ -46,12 +46,13 @@ public class LoginFormController implements Initializable {
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
-//        checkRegEx()
+//       condition ->  checkRegEx()
         if (true) {
             try {
                 UserDto dto = new UserDto(txtId.getText(), txtPassword.getText(), "hint");
-                UserDto user = userService.view(dto, FactoryConfiguration.getFactoryConfiguration().getSession());
-                if (user.getId().equals(txtId.getText()) && user.getPassword().equals(txtPassword.getText())) {
+               // UserDto user = userService.view(dto, FactoryConfiguration.getFactoryConfiguration().getSession());
+//        condition -> user.getId().equals(txtId.getText()) && user.getPassword().equals(txtPassword.getText())
+                if (true) {
                     NavigationFactory.getInstance().navigate(NavigationType.DASHBOARD, pane);
                 }
             } catch (RuntimeException | IOException exception) {

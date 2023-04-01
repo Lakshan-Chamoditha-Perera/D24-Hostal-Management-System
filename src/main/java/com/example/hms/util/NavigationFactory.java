@@ -37,6 +37,19 @@ public class NavigationFactory {
                 init("RoomForm.fxml");
                 break;
 
+            case STUDENT:
+                stage.setTitle("Manage Students");
+                init("StudentForm.fxml");
+                break;
+            case RESERVATION:
+                stage.setTitle("Manage Reservation");
+                init("ReservationForm.fxml");
+                break;
+
+//            case BOOK_NOW:
+//                stage.setTitle("Booking");
+//                init("com/example/hms/view/AddReservationForm.fxml");
+//                break;
             default:
                 throw new RuntimeException("Ui not Implemented!");
         }

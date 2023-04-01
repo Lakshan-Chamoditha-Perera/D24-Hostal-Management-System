@@ -36,7 +36,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto view(UserDto dto, Session session) throws RuntimeException {
-        return Converter.getInstance().convert(userDao.view(Converter.getInstance().convert(dto), session));
+        User view = userDao.view(Converter.getInstance().convert(dto), session);
+        if(view!=null){
+            return  Converter.getInstance().convert(view);
+        }
+        throw new RuntimeException("User Not Found !");
     }
 
     @Override
