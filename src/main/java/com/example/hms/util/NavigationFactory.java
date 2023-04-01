@@ -46,10 +46,10 @@ public class NavigationFactory {
                 init("ReservationForm.fxml");
                 break;
 
-//            case BOOK_NOW:
-//                stage.setTitle("Booking");
-//                init("com/example/hms/view/AddReservationForm.fxml");
-//                break;
+            case USER:
+                stage.setTitle("User");
+                init("UserForm.fxml");
+                break;
             default:
                 throw new RuntimeException("Ui not Implemented!");
         }

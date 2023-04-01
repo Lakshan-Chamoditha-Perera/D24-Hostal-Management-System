@@ -69,8 +69,8 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void btnUserOnAction(ActionEvent event) {
-
+    void btnUserOnAction(ActionEvent event) throws IOException {
+        NavigationFactory.getInstance().navigate(NavigationType.USER,pane);
     }
 
     @Override

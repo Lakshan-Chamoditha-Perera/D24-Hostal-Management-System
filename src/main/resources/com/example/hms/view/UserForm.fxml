@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="727.0" prefWidth="1089.0" style="-fx-background-radius: 40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.UserFormController">
+   <children>
+      <TableView fx:id="tblUsers" layoutX="61.0" layoutY="94.0" prefHeight="317.0" prefWidth="965.0">
+         <columns>
+            <TableColumn fx:id="colId" prefWidth="261.0" text="User ID" />
+            <TableColumn fx:id="colPassword" prefWidth="444.0" text="Password" />
+            <TableColumn fx:id="colPasswordHInt" prefWidth="259.0" text="Password Hint" />
+         </columns>
+      </TableView>
+      <Separator layoutX="26.0" layoutY="440.0" prefHeight="0.0" prefWidth="1036.0" />
+      <Label layoutX="59.0" layoutY="13.0" text="Manage Users" textFill="#112d4e">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="459.0" text="User ID">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtId" editable="false" layoutX="232.0" layoutY="454.0" prefHeight="33.0" prefWidth="282.0" promptText="ID" />
+      <Label layoutX="79.0" layoutY="511.0" text="Password">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPassword" layoutX="230.0" layoutY="506.0" prefHeight="33.0" prefWidth="282.0" promptText="Type" />
+      <Separator layoutX="14.0" layoutY="66.0" prefHeight="0.0" prefWidth="1036.0" />
+      <ButtonBar layoutX="61.0" layoutY="611.0" prefHeight="52.0" prefWidth="451.0">
+         <buttons>
+            <JFXButton fx:id="btnAdd" onAction="#btnAddOnAction" prefHeight="52.0" prefWidth="156.0" style="-fx-background-color: #1363DF;" text="Add" textFill="WHITE" />
+            <JFXButton fx:id="btnUpdate" onAction="#btnUpdateOnAction" prefHeight="79.0" prefWidth="151.0" style="-fx-background-color: #DFF6FF;" text="Update">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnDelete" onAction="#btnDeleteOnAction" prefHeight="79.0" prefWidth="151.0" style="-fx-background-color: #06283D;" text="Delete" textFill="WHITE" />
+         </buttons>
+      </ButtonBar>
+      <Label layoutX="81.0" layoutY="561.0" text="Password Hint">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPasswordHint" layoutX="232.0" layoutY="556.0" prefHeight="33.0" prefWidth="282.0" promptText="Panadura" />
+      <ImageView blendMode="MULTIPLY" fitHeight="258.0" fitWidth="282.0" layoutX="677.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img_14.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
