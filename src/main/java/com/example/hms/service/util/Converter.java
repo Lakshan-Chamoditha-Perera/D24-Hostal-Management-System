@@ -13,10 +13,13 @@ public class Converter {
     public static Converter getInstance() {
         return converter == null ? converter = new Converter() : converter;
     }
-    public User convert(UserDto dto){
-        return new User(dto.getId(), dto.getPassword(), dto.getPasswordHint());
-    }
-    public UserDto convert(User entity){
+
+    public UserDto toUserDto(User entity) {
         return new UserDto(entity.getId(), entity.getPassword(), entity.getPasswordHint());
     }
+
+    public User toUserEntity(UserDto dto) {
+        return new User(dto.getId(), dto.getPassword(), dto.getPasswordHint());
+    }
+
 }

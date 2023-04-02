@@ -1,8 +1,12 @@
 package com.example.hms.controller;
 
+import com.example.hms.service.ServiceFactory;
+import com.example.hms.service.custom.StudentService;
+import com.example.hms.service.util.ServiceType;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -11,7 +15,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class StudentFormController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class StudentFormController implements Initializable {
 
     @FXML
     private AnchorPane pane;
@@ -94,5 +101,11 @@ public class StudentFormController {
     void txtSearchOnKeyReleased(KeyEvent event) {
 
     }
+private StudentService studentService;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        studentService = ServiceFactory.getServiceFactory().getService(ServiceType.StudentService);
 
+
+    }
 }

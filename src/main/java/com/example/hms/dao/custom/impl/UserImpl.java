@@ -1,11 +1,9 @@
 package com.example.hms.dao.custom.impl;
 
 import com.example.hms.dao.custom.UserDao;
-import com.example.hms.entity.Student;
 import com.example.hms.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -65,14 +63,11 @@ public class UserImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAll(Session session) {
-        try {
+    public List getAll(Session session) {
+        try (session) {
             String sql = "From User";
-            Query query = session.createQuery(sql);
-            List<User> list = query.list();
+            List list = session.createQuery(sql).list();
             return list;
-        } finally {
-            session.close();
         }
     }
 }
