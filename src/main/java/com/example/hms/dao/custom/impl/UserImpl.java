@@ -12,7 +12,7 @@ public class UserImpl implements UserDao {
     @Override
     public Boolean save(User entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
-        try {
+        try (session) {
             transaction.begin();
             session.save(entity);
             transaction.commit();
@@ -20,8 +20,6 @@ public class UserImpl implements UserDao {
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
-        } finally {
-            session.close();
         }
     }
 
@@ -69,5 +67,11 @@ public class UserImpl implements UserDao {
             List list = session.createQuery(sql).list();
             return list;
         }
+    }
+
+    @Override
+    public String getLastId(Session session) {
+
+        return null;
     }
 }

@@ -16,4 +16,5 @@ public interface SuperService<T extends SuperDto> {
     T view(T entity, Session session) throws RuntimeException;
 
     List<T> getAll(Session session);
+    String getLastId(Session session);
 }

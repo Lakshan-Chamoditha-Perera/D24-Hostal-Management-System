@@ -19,13 +19,13 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class Student implements SuperEntity {
+    @Id
+    private String student_id;
     private String name;
     private String address;
     private String contact_no;
     private Date date;
     private String gender;
-    @Id
-    private String student_id;
     @ToString.Exclude
     @OneToMany(targetEntity = Reservation.class, mappedBy = "student")
     private List<Reservation> reservationList = new ArrayList<>();

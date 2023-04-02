@@ -48,6 +48,9 @@ public class RegExFactory {
                 return mobilePattern;
             case DOUBLE:
                 return doublePattern;
+            case CITY:
+                return cityPattern;
+
             default:
                 throw new RuntimeException("Pattern not found");
         }

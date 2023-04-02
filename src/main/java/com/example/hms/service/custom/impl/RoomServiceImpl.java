@@ -39,4 +39,9 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> getAll(Session session) {
         return null;
     }
+
+    @Override
+    public String getLastId(Session session) {
+        return null;
+    }
 }

@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UserDto  implements  SuperDto{
+public class UserDto implements SuperDto {
     private String id;
     private String password;
     private String passwordHint;

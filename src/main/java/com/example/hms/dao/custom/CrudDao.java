@@ -16,4 +16,5 @@ public interface CrudDao<T extends SuperEntity> extends SuperDao {
     T view(T entity,Session session);
 
     List<T> getAll(Session session);
+    String getLastId(Session session);
 }

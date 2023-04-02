@@ -25,7 +25,7 @@ public class NavigationFactory {
         panel.getChildren().clear();
         switch (type) {
             case LOGIN:
-                stage.setTitle("D/24 Hostal Management System");
+                stage.setTitle("D/24 Hostel Management System");
                 init("LoginPage.fxml");
                 break;
 

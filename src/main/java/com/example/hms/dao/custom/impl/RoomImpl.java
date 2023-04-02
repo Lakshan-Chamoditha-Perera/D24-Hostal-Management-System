@@ -14,15 +14,13 @@ public class RoomImpl implements RoomDao {
     @Override
     public Boolean save(Room entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
-        try {
+        try (session) {
             session.save(entity);
             transaction.commit();
             return true;
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
-        } finally {
-            session.close();
         }
     }
 
@@ -75,5 +73,10 @@ public class RoomImpl implements RoomDao {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public String getLastId(Session session) {
+        return null;
     }
 }

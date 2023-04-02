@@ -21,33 +21,59 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean save(UserDto dto, Session session) throws RuntimeException {
-        Boolean save = userDao.save(Converter.getInstance().toUserEntity(dto), session);
-        return save;
+        User user = new User();
+        user.setId(dto.getId());
+        user.setPassword(dto.getPassword());
+        user.setPasswordHint(dto.getPasswordHint());
+
+        return userDao.save(user, session);
     }
 
     @Override
     public Boolean update(UserDto dto, Session session) throws RuntimeException {
-        return userDao.update(Converter.getInstance().toUserEntity(dto), session);
+        User user = new User();
+        user.setId(dto.getId());
+        user.setPassword(dto.getPassword());
+        user.setPasswordHint(dto.getPasswordHint());
+
+        return userDao.update(user, session);
     }
 
     @Override
     public Boolean delete(UserDto dto, Session session) throws RuntimeException {
-        return userDao.delete(Converter.getInstance().toUserEntity(dto), session);
+        User user = new User();
+        user.setId(dto.getId());
+
+        return userDao.delete(user, session);
     }
 
     @Override
     public UserDto view(UserDto dto, Session session) throws RuntimeException {
-        User entity = userDao.view(Converter.getInstance().toUserEntity(dto), session);
-        if (entity != null) return Converter.getInstance().toUserDto(entity);
+        User user = new User();
+        user.setId(dto.getId());
+
+        User entity = userDao.view(user, session);
+
+        if (entity != null) {
+            dto.setId(dto.getId());
+            dto.setPassword(dto.getPassword());
+            dto.setPasswordHint(dto.getPasswordHint());
+            return dto;
+        }
         throw new RuntimeException("User Not Found !");
     }
 
     @Override
-    public List<UserDto> getAll(Session session) throws RuntimeException{
+    public List<UserDto> getAll(Session session) throws RuntimeException {
         List<User> allUsers = userDao.getAll(session);
-        if (allUsers.size()>0) {
+        if (allUsers.size() > 0) {
             return allUsers.stream().map(user -> Converter.getInstance().toUserDto(user)).collect(Collectors.toList());
         }
         throw new RuntimeException("Empty users list!");
+    }
+
+    @Override
+    public String getLastId(Session session) {
+        return null;
     }
 }

@@ -50,34 +50,32 @@ public class DashboardController implements Initializable {
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) throws IOException {
-        NavigationFactory.getInstance().navigate(NavigationType.LOGIN,mainPane);
+        NavigationFactory.getInstance().navigate(NavigationType.LOGIN, mainPane);
     }
 
     @FXML
     void btnReservationOnAction(ActionEvent event) throws IOException {
-        NavigationFactory.getInstance().navigate(NavigationType.RESERVATION,pane);
+        NavigationFactory.getInstance().navigate(NavigationType.RESERVATION, pane);
     }
 
     @FXML
     void btnRoomsOnAction(ActionEvent event) throws IOException {
-        NavigationFactory.getInstance().navigate(NavigationType.ROOM,pane);
+        NavigationFactory.getInstance().navigate(NavigationType.ROOM, pane);
     }
 
     @FXML
     void btnStudentsOnAction(ActionEvent event) throws IOException {
-        NavigationFactory.getInstance().navigate(NavigationType.STUDENT,pane);
+        NavigationFactory.getInstance().navigate(NavigationType.STUDENT, pane);
     }
 
     @FXML
     void btnUserOnAction(ActionEvent event) throws IOException {
-        NavigationFactory.getInstance().navigate(NavigationType.USER,pane);
+        NavigationFactory.getInstance().navigate(NavigationType.USER, pane);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0),
-                event -> lblTime.setText(""+new SimpleDateFormat("EEEE - MMM-dd-yyyy  HH:mm:ss").format(Calendar.getInstance().getTime()))),
-                new KeyFrame(Duration.seconds(1)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> lblTime.setText("" + new SimpleDateFormat("EEEE - MMM-dd-yyyy  HH:mm:ss").format(Calendar.getInstance().getTime()))), new KeyFrame(Duration.seconds(1)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }

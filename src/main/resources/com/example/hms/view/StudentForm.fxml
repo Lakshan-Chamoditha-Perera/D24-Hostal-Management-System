@@ -78,7 +78,7 @@
             </font>
         </Label>
         <TextField fx:id="txtContact" layoutX="203.0" layoutY="663.0" prefHeight="33.0" prefWidth="282.0" promptText="0714066967" />
-        <DatePicker layoutX="773.0" layoutY="518.0" showWeekNumbers="true" />
+        <DatePicker fx:id="cmbDob" layoutX="773.0" layoutY="518.0" showWeekNumbers="true" />
         <RadioButton fx:id="rBtnMale" layoutX="773.0" layoutY="575.0" mnemonicParsing="false" text="Male">
          <toggleGroup>
                 <ToggleGroup fx:id="gender" />

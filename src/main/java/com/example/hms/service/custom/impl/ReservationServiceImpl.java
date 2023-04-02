@@ -42,4 +42,9 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> getAll(Session session) {
         return null;
     }
+
+    @Override
+    public String getLastId(Session session) {
+        return null;
+    }
 }
