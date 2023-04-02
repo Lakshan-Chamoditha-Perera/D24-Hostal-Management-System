@@ -25,7 +25,7 @@ public class StudentImpl implements StudentDao {
     }
 
     @Override
-    public Boolean update(Student entity, Session session) {
+    public Boolean update(Student entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -39,11 +39,11 @@ public class StudentImpl implements StudentDao {
     }
 
     @Override
-    public Boolean delete(Student entity, Session session) {
+    public Boolean delete(Student entity, Session session) throws RuntimeException{
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
-            session.delete(entity.getStudent_id());
+            session.delete(entity);
             transaction.commit();
             return true;
         } catch (RuntimeException exception) {
@@ -53,14 +53,14 @@ public class StudentImpl implements StudentDao {
     }
 
     @Override
-    public Student view(Student entity, Session session) {
+    public Student view(Student entity, Session session) throws RuntimeException {
         try (session) {
             return session.get(Student.class, entity.getStudent_id());
         }
     }
 
     @Override
-    public List<Student> getAll(Session session) {
+    public List<Student> getAll(Session session) throws RuntimeException {
         try (session) {
             String sql = "FROM Student";
             Query query = session.createQuery(sql);
@@ -70,7 +70,7 @@ public class StudentImpl implements StudentDao {
     }
 
     @Override
-    public String getLastId(Session session) {
+    public String getLastId(Session session)throws RuntimeException  {
         try (session) {
             Query query = session.createQuery("SELECT student_id FROM Student ORDER BY student_id DESC");
             query.setMaxResults(1);

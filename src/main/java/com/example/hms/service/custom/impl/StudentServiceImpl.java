@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean save(StudentDto dto, Session session) {
+    public Boolean save(StudentDto dto, Session session)throws RuntimeException  {
         Student student = new Student();
 
         student.setStudent_id(dto.getStudent_id());
@@ -40,8 +40,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean delete(StudentDto dto, Session session) {
-        return null;
+    public Boolean delete(StudentDto dto, Session session) throws RuntimeException{
+        Student student = new Student();
+        student.setStudent_id(dto.getStudent_id());
+        return (studentDao.delete(student, session));
     }
 
     @Override

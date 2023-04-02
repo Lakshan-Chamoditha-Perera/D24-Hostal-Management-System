@@ -38,7 +38,7 @@ public class StudentFormController implements Initializable {
     private TableColumn<StudentDto, String> colStudentName;
 
     @FXML
-    private TableColumn <StudentDto,String>colAddress;
+    private TableColumn<StudentDto, String> colAddress;
 
     @FXML
     private TableColumn<StudentDto, String> colContact;
@@ -109,7 +109,20 @@ public class StudentFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-
+        StudentDto selectedItem = tblStudents.getSelectionModel().getSelectedItem();
+        try {
+            if (selectedItem != null) {
+                studentService.delete(selectedItem, FactoryConfiguration.getFactoryConfiguration().getSession());
+                new Alert(Alert.AlertType.INFORMATION, "Student Deleted").show();
+                clearAll();
+                refreshTable();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Select Student first!").show();
+            }
+        } catch (RuntimeException e) {
+          e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     @FXML
