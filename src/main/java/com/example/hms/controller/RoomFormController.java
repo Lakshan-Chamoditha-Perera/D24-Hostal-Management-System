@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.List;
@@ -108,7 +109,29 @@ public class RoomFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        try {
+            if (validateData()) {
+                RoomDto roomDto = new RoomDto();
+                roomDto.setRoom_type_id(txtId.getText());
+                roomDto.setType(txtType.getText());
+                roomDto.setKey_money(Double.valueOf(txtKeyMoney.getText()));
+                roomDto.setQty(Integer.valueOf(txtQty.getText()));
 
+                roomService.update(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                new Alert(Alert.AlertType.INFORMATION, "Room Updated").show();
+
+                refreshTable();
+                clearAll();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Invalid input!").show();
+            }
+        } catch (RuntimeException exception) {
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+            clearAll();
+        }
+        btnAdd.setDisable(false);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     @FXML
@@ -131,6 +154,9 @@ public class RoomFormController implements Initializable {
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
 
         refreshTable();
+
+        btnDelete.setDisable(true);
+        btnUpdate.setDisable(true);
     }
 
     private void refreshTable() {
@@ -143,6 +169,20 @@ public class RoomFormController implements Initializable {
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
             tblRooms.getItems().clear();
+        }
+    }
+
+    public void tblRoomsOnMouseClicked(MouseEvent mouseEvent) {
+        RoomDto selectedItem = tblRooms.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+         //   btnAdd.setDisable(true);
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
+
+            txtId.setText(selectedItem.getRoom_type_id());
+            txtType.setText(selectedItem.getType());
+            txtQty.setText(String.valueOf(selectedItem.getQty()));
+            txtKeyMoney.setText(String.valueOf(selectedItem.getKey_money()));
         }
     }
 }
