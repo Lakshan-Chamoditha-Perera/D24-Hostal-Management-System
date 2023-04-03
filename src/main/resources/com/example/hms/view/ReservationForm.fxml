@@ -16,7 +16,7 @@
             <Font size="43.0" />
          </font>
       </Label>
-      <TableView fx:id="tblReservations" layoutX="29.0" layoutY="131.0" prefHeight="289.0" prefWidth="1023.0">
+      <TableView fx:id="tblReservations" layoutX="29.0" layoutY="131.0" onMouseClicked="#tblReservationsOnMouseClicked" prefHeight="289.0" prefWidth="1023.0">
         <columns>
           <TableColumn fx:id="colReservationId" prefWidth="137.99996948242188" text="Reservation ID" />
           <TableColumn fx:id="colStudentId" prefWidth="237.0" text="Student ID" />
@@ -25,7 +25,7 @@
             <TableColumn fx:id="colStatus" prefWidth="188.0" text="Status" />
         </columns>
       </TableView>
-      <TextField fx:id="txtSearchByStudentId" layoutX="822.0" layoutY="93.0" onAction="#txtSearchByStudentIdOnAction" onKeyReleased="#txtSearchByStudentIdOnKeyReleased" prefHeight="26.0" prefWidth="228.0" promptText="Search By ID" />
+      <TextField fx:id="txtSearchByStudentId" layoutX="822.0" layoutY="93.0" onAction="#txtSearchByStudentIdOnAction" onKeyReleased="#txtSearchByStudentIdOnKeyReleased" prefHeight="26.0" prefWidth="228.0" promptText="Search By Student ID" />
       <TableView fx:id="tblRoom" layoutX="29.0" layoutY="465.0" prefHeight="249.0" prefWidth="490.0">
         <columns>
           <TableColumn fx:id="colRoomID" prefWidth="109.99996948242188" text="Room ID" />

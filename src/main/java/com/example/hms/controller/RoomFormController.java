@@ -104,30 +104,52 @@ public class RoomFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        try {
+            if (tblRooms.getSelectionModel().getSelectedItem() != null) {
+                RoomDto roomDto = new RoomDto();
+                roomDto.setRoom_type_id(txtId.getText());
 
+                roomService.delete(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                new Alert(Alert.AlertType.INFORMATION, "Room Deleted").show();
+
+                refreshTable();
+                clearAll();
+            } else {
+                throw new RuntimeException("Select Room First");
+            }
+        } catch (RuntimeException exception) {
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+            clearAll();
+        }
+        btnAdd.setDisable(false);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         try {
-            if (validateData()) {
-                RoomDto roomDto = new RoomDto();
-                roomDto.setRoom_type_id(txtId.getText());
-                roomDto.setType(txtType.getText());
-                roomDto.setKey_money(Double.valueOf(txtKeyMoney.getText()));
-                roomDto.setQty(Integer.valueOf(txtQty.getText()));
+            if (tblRooms.getSelectionModel().getSelectedItem() != null) {
+                if (validateData()) {
+                    RoomDto roomDto = new RoomDto();
+                    roomDto.setRoom_type_id(txtId.getText());
+                    roomDto.setType(txtType.getText());
+                    roomDto.setKey_money(Double.valueOf(txtKeyMoney.getText()));
+                    roomDto.setQty(Integer.valueOf(txtQty.getText()));
 
-                roomService.update(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
-                new Alert(Alert.AlertType.INFORMATION, "Room Updated").show();
+                    roomService.update(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                    new Alert(Alert.AlertType.INFORMATION, "Room Updated").show();
 
-                refreshTable();
-                clearAll();
+                    refreshTable();
+                    clearAll();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Invalid input!").show();
+                }
             } else {
-                new Alert(Alert.AlertType.ERROR, "Invalid input!").show();
+                throw new RuntimeException("Select Room First");
             }
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
-            clearAll();
         }
         btnAdd.setDisable(false);
         btnUpdate.setDisable(true);
@@ -175,14 +197,15 @@ public class RoomFormController implements Initializable {
     public void tblRoomsOnMouseClicked(MouseEvent mouseEvent) {
         RoomDto selectedItem = tblRooms.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-         //   btnAdd.setDisable(true);
+            btnAdd.setDisable(true);
             btnUpdate.setDisable(false);
             btnDelete.setDisable(false);
-
             txtId.setText(selectedItem.getRoom_type_id());
             txtType.setText(selectedItem.getType());
             txtQty.setText(String.valueOf(selectedItem.getQty()));
             txtKeyMoney.setText(String.valueOf(selectedItem.getKey_money()));
+        }else{
+            btnAdd.setDisable(false);
         }
     }
 }

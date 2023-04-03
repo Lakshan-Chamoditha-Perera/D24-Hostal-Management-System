@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -95,7 +96,7 @@ public class StudentFormController implements Initializable {
                 studentDto.setAddress(txtAddress.getText());
                 studentDto.setGender((rBtnMale.isSelected()) ? "Male" : "Female");
                 studentDto.setContact_no(txtContact.getText());
-                studentDto.setDob(String.valueOf(cmbDob.getValue()));
+                studentDto.setDob(Date.valueOf(cmbDob.getValue()));
 
                 studentService.save(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
                 new Alert(Alert.AlertType.INFORMATION, "Student Added").show();
@@ -141,7 +142,7 @@ public class StudentFormController implements Initializable {
                 studentDto.setAddress(txtAddress.getText());
                 studentDto.setGender((rBtnMale.isSelected()) ? "Male" : "Female");
                 studentDto.setContact_no(txtContact.getText());
-                studentDto.setDob(String.valueOf(cmbDob.getValue()));
+                studentDto.setDob(Date.valueOf(cmbDob.getValue()));
 
                 studentService.update(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
                 new Alert(Alert.AlertType.INFORMATION, "Student Updated").show();
@@ -235,7 +236,7 @@ public class StudentFormController implements Initializable {
                     rBtnFemale.setSelected(true);
                 }
                 txtContact.setText(studentDto.getContact_no());
-                cmbDob.setValue(LocalDate.parse(studentDto.getDob()));
+                cmbDob.setValue(studentDto.getDob().toLocalDate());
             } else {
                 btnUpdate.setDisable(true);
             }

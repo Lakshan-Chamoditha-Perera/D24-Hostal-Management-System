@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,8 +19,8 @@ public class StudentDto implements SuperDto{
     private String name;
     private String address;
     private String contact_no;
-    private String dob;
+    private Date dob;
     private String gender;
    @ToString.Exclude
-   private final List<Reservation> reservationList = new ArrayList<>();
+   private final List<ReservationDto> reservationList = new ArrayList<>();
 }

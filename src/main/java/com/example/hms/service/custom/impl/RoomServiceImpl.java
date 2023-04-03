@@ -20,29 +20,31 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Boolean save(RoomDto dto, Session session) {
+    public Boolean save(RoomDto dto, Session session) throws RuntimeException {
         return roomDao.save(Converter.getInstance().toRoomEntity(dto), session);
     }
 
     @Override
-    public Boolean update(RoomDto dto, Session session) {
+    public Boolean update(RoomDto dto, Session session) throws RuntimeException {
         return roomDao.update(Converter.getInstance().toRoomEntity(dto), session);
     }
 
     @Override
-    public Boolean delete(RoomDto dto, Session session) {
-
+    public Boolean delete(RoomDto dto, Session session) throws RuntimeException {
         return roomDao.delete(Converter.getInstance().toRoomEntity(dto), session);
     }
 
     @Override
-    public RoomDto view(RoomDto dto, Session session) {
+    public RoomDto view(RoomDto dto, Session session) throws RuntimeException {
         Room entity = roomDao.view(Converter.getInstance().toRoomEntity(dto), session);
-        return Converter.getInstance().toRoomDto(entity);
+        if(entity!=null){
+            return Converter.getInstance().toRoomDto(entity);
+        }
+        throw new RuntimeException("Room not found!");
     }
 
     @Override
-    public List<RoomDto> getAll(Session session) {
+    public List<RoomDto> getAll(Session session) throws RuntimeException {
         List<Room> roomList = roomDao.getAll(session);
         if (roomList.size() > 0) {
             return roomList.stream().map(room -> Converter.getInstance().toRoomDto(room)).collect(Collectors.toList());
@@ -51,7 +53,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public String getLastId(Session session) {
+    public String getLastId(Session session) throws RuntimeException {
         String lastId = roomDao.getLastId(session);
         if (lastId == null) {
             return "RM-0001";
