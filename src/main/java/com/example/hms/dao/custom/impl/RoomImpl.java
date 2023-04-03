@@ -63,13 +63,11 @@ public class RoomImpl implements RoomDao {
 
     @Override
     public List<Room> getAll(Session session) {
-        try {
+        try (session) {
             String sql = "From Room ";
             Query query = session.createQuery(sql);
             List<Room> list = query.list();
             return list;
-        } finally {
-            session.close();
         }
     }
 

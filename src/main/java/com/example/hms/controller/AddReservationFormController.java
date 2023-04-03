@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Date;
@@ -67,12 +68,12 @@ public class AddReservationFormController implements Initializable {
 
     @FXML
     void btnBookOnAction(ActionEvent event) {
-
+        saveReservation("un-paid");
     }
 
     @FXML
     void btnPayNowOnAction(ActionEvent event) {
-        saveReservation("Paid");
+        saveReservation("paid");
     }
 
     private void saveReservation(String status) {
@@ -92,13 +93,20 @@ public class AddReservationFormController implements Initializable {
                 reservationDto.setRoomDto(roomDto);
 
                 Boolean save = reservationService.save(reservationDto, FactoryConfiguration.getFactoryConfiguration().getSession());
-                new Alert(Alert.AlertType.INFORMATION,"Added!").show();
 
+                Stage stage = (Stage) floatingPane.getScene().getWindow();
+                stage.setAlwaysOnTop(false);
+                new Alert(Alert.AlertType.INFORMATION, "Added!").showAndWait();
+                stage.setAlwaysOnTop(true);
+                stage.close();
             }
         } catch (RuntimeException exception) {
             exception.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
-            alert.showAndWait();
+            Stage stage = (Stage) floatingPane.getScene().getWindow();
+            stage.setAlwaysOnTop(false);
+            txtQty.clear();
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).showAndWait();
+            stage.setAlwaysOnTop(false);
         }
     }
 
@@ -180,9 +188,10 @@ public class AddReservationFormController implements Initializable {
                 txtRoomAvailableQty.setText("0");
             }
         } catch (RuntimeException exception) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            Stage stage = (Stage) floatingPane.getScene().getWindow();
+            stage.setAlwaysOnTop(false);
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).showAndWait();
+            stage.setAlwaysOnTop(false);
             txtQty.clear();
         }
     }
@@ -202,7 +211,7 @@ public class AddReservationFormController implements Initializable {
 
     public void txtQtyOnKeyReleased(KeyEvent keyEvent) {
         try {
-            if (RegExFactory.getInstance().getPattern(RegExType.INTEGER).matcher(txtQty.getText()).matches() & Integer.parseInt(txtQty.getText()) > 0) {
+            if ((!txtQty.getText().equals("")) && RegExFactory.getInstance().getPattern(RegExType.INTEGER).matcher(txtQty.getText()).matches() && Integer.parseInt(txtQty.getText()) > 0) {
                 if (Integer.parseInt(txtQty.getText()) <= Integer.parseInt(txtRoomAvailableQty.getText())) {
                     double price = Integer.parseInt(txtQty.getText()) * Double.parseDouble(lblRoomPrice.getText());
                     txtTotal.setText(String.valueOf(price));
@@ -215,10 +224,13 @@ public class AddReservationFormController implements Initializable {
                 throw new RuntimeException("Invalid input");
             }
         } catch (RuntimeException exception) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            Stage stage = (Stage) floatingPane.getScene().getWindow();
+            stage.setAlwaysOnTop(false);
             txtQty.clear();
+            txtTotal.setText("");
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).showAndWait();
+            stage.setAlwaysOnTop(false);
+
         }
     }
 }

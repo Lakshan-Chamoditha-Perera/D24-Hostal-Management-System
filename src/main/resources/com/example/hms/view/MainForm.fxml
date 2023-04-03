@@ -28,7 +28,7 @@
                 <Font name="Loma Bold" size="96.0" />
             </font>
         </Label>
-        <Label layoutX="53.0" layoutY="429.0" prefHeight="82.0" prefWidth="745.0" text="Hostal Management System">
+        <Label layoutX="53.0" layoutY="429.0" prefHeight="82.0" prefWidth="745.0" text="Hostel Management System">
             <font>
                 <Font name="Loma Bold" size="54.0" />
             </font>

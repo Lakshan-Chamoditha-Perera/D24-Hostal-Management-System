@@ -11,7 +11,7 @@ import java.util.List;
 public class ReservationImpl implements ReservationDao {
 
     @Override
-    public Boolean save(Reservation entity, Session session) {
+    public Boolean save(Reservation entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
