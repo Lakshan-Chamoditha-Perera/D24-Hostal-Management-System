@@ -60,6 +60,7 @@ public class ReservationImpl implements ReservationDao {
 
     @Override
     public String getLastId(Session session) {
+
         return null;
     }
 }

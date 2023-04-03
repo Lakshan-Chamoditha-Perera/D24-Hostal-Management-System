@@ -26,7 +26,7 @@ public class UserImpl implements UserDao {
     @Override
     public Boolean update(User entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
-        try {
+        try (session) {
             transaction.begin();
             session.update(entity);
             transaction.commit();
@@ -34,8 +34,6 @@ public class UserImpl implements UserDao {
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
-        } finally {
-            session.close();
         }
     }
 
@@ -71,7 +69,6 @@ public class UserImpl implements UserDao {
 
     @Override
     public String getLastId(Session session) {
-
         return null;
     }
 }

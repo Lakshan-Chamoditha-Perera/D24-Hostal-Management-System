@@ -20,7 +20,7 @@ import java.util.List;
 @ToString
 public class Student implements SuperEntity {
     @Id
-    private String student_id;
+    private  String student_id;
     private String name;
     private String address;
     private String contact_no;

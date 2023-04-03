@@ -21,29 +21,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean save(StudentDto dto, Session session)throws RuntimeException  {
-        Student student = new Student();
-
-        student.setStudent_id(dto.getStudent_id());
-        student.setName(dto.getName());
-        student.setAddress(dto.getAddress());
-        student.setContact_no(dto.getContact_no());
-        student.setGender(dto.getGender());
-        student.setDate(Date.valueOf(dto.getDob()));
-
-        return (studentDao.save(student, session));
+    public Boolean save(StudentDto dto, Session session) throws RuntimeException {
+        return (studentDao.save(Converter.getInstance().toStudentEntity(dto), session));
     }
 
     @Override
     public Boolean update(StudentDto dto, Session session) {
-        return null;
+        return (studentDao.update(Converter.getInstance().toStudentEntity(dto), session));
     }
 
     @Override
-    public Boolean delete(StudentDto dto, Session session) throws RuntimeException{
-        Student student = new Student();
-        student.setStudent_id(dto.getStudent_id());
-        return (studentDao.delete(student, session));
+    public Boolean delete(StudentDto dto, Session session) throws RuntimeException {
+        return (studentDao.delete(Converter.getInstance().toStudentEntity(dto), session));
     }
 
     @Override
@@ -53,9 +42,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> getAll(Session session) throws RuntimeException {
-
         List<Student> studentList = studentDao.getAll(session);
-//        studentDao.getLastId(session);
         if (studentList.size() > 0) {
             return studentList.stream().map(student -> Converter.getInstance().toStudentDto(student)).collect(Collectors.toList());
         }
@@ -65,7 +52,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public String getLastId(Session session) {
         String lastId = studentDao.getLastId(session);
-        //  System.out.println(lastId);
         if (lastId == null) {
             return "IT000001";
         } else {

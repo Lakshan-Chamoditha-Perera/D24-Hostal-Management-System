@@ -28,7 +28,7 @@
             </font>
         </Label>
         <TextField fx:id="txtId" editable="false" layoutX="203.0" layoutY="514.0" prefHeight="33.0" prefWidth="282.0"
-                   promptText="ID"/>
+                   promptText="RM-001"/>
         <Label layoutX="79.0" layoutY="579.0" text="Type">
             <font>
                 <Font size="20.0"/>

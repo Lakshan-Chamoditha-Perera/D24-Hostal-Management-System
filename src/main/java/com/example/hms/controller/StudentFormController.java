@@ -16,9 +16,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -114,20 +116,48 @@ public class StudentFormController implements Initializable {
             if (selectedItem != null) {
                 studentService.delete(selectedItem, FactoryConfiguration.getFactoryConfiguration().getSession());
                 new Alert(Alert.AlertType.INFORMATION, "Student Deleted").show();
-                clearAll();
                 refreshTable();
+                clearAll();
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Select Student first!").show();
             }
         } catch (RuntimeException e) {
-          e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+        btnUpdate.setDisable(true);
+        btnAdd.setDisable(false);
+        btnDelete.setDisable(true);
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        try {
+            if (validation()) {
+                StudentDto studentDto = new StudentDto();
 
+                studentDto.setStudent_id(txtId.getText());
+                studentDto.setName(txtName.getText());
+                studentDto.setAddress(txtAddress.getText());
+                studentDto.setGender((rBtnMale.isSelected()) ? "Male" : "Female");
+                studentDto.setContact_no(txtContact.getText());
+                studentDto.setDob(String.valueOf(cmbDob.getValue()));
+
+                studentService.update(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                new Alert(Alert.AlertType.INFORMATION, "Student Updated").show();
+
+                clearAll();
+                refreshTable();
+
+            } else {
+                throw new RuntimeException("invalid input data in fields!");
+            }
+        } catch (RuntimeException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+        btnUpdate.setDisable(true);
+        btnAdd.setDisable(false);
+        btnDelete.setDisable(true);
     }
 
     private void clearAll() {
@@ -135,7 +165,6 @@ public class StudentFormController implements Initializable {
         txtAddress.clear();
         txtContact.clear();
         txtName.clear();
-
     }
 
     private boolean validation() {
@@ -144,7 +173,12 @@ public class StudentFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) {
+        if (RegExFactory.getInstance().getPattern(RegExType.STUDENT_ID).matcher(txtSearch.getText()).matches()) {
 
+            StudentDto studentDto = new StudentDto();
+            studentDto.setStudent_id(txtSearch.getText());
+//            studentService.view(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+        }
     }
 
     @FXML
@@ -162,7 +196,9 @@ public class StudentFormController implements Initializable {
         colDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+
         refreshTable();
+
     }
 
     private void refreshTable() {
@@ -173,11 +209,38 @@ public class StudentFormController implements Initializable {
             studentDtoObservableList.addAll(all);
             tblStudents.setItems(studentDtoObservableList);
         } catch (RuntimeException exception) {
-            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+             tblStudents.getItems().clear();
         }
     }
 
     private void generateStudentId() {
         txtId.setText(studentService.getLastId(FactoryConfiguration.getFactoryConfiguration().getSession()));
+    }
+
+    public void tblStudentOnMouseClicked(MouseEvent mouseEvent) {
+        StudentDto studentDto = tblStudents.getSelectionModel().getSelectedItem();
+        try {
+            if (studentDto != null) {
+                btnUpdate.setDisable(false);
+                btnDelete.setDisable(false);
+                btnAdd.setDisable(true);
+//                studentService.view(selectedItem, FactoryConfiguration.getFactoryConfiguration().getSession());
+                txtId.setText(studentDto.getStudent_id());
+                txtName.setText(studentDto.getName());
+                txtAddress.setText(studentDto.getAddress());
+                if (studentDto.getGender().equals("Male")) {
+                    rBtnMale.setSelected(true);
+                } else {
+                    rBtnFemale.setSelected(true);
+                }
+                txtContact.setText(studentDto.getContact_no());
+                cmbDob.setValue(LocalDate.parse(studentDto.getDob()));
+            } else {
+                btnUpdate.setDisable(true);
+            }
+        } catch (RuntimeException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 }

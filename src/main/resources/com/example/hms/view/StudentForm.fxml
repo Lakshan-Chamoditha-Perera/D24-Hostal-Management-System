@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="pane" prefHeight="727.0" prefWidth="1089.0" style="-fx-background-radius: 40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.StudentFormController">
     <children>
-        <TableView fx:id="tblStudents" layoutX="61.0" layoutY="119.0" prefHeight="317.0" prefWidth="965.0">
+        <TableView fx:id="tblStudents" layoutX="61.0" layoutY="119.0" onMouseClicked="#tblStudentOnMouseClicked" prefHeight="317.0" prefWidth="965.0">
             <columns>
                 <TableColumn fx:id="colStudentId" prefWidth="133.99999618530273" text="Student ID" />
                 <TableColumn fx:id="colStudentName" prefWidth="242.0" text="Name" />
@@ -80,9 +80,10 @@
         <TextField fx:id="txtContact" layoutX="203.0" layoutY="663.0" prefHeight="33.0" prefWidth="282.0" promptText="0714066967" />
         <DatePicker fx:id="cmbDob" layoutX="773.0" layoutY="518.0" showWeekNumbers="true" />
         <RadioButton fx:id="rBtnMale" layoutX="773.0" layoutY="575.0" mnemonicParsing="false" text="Male">
-         <toggleGroup>
+            <toggleGroup>
                 <ToggleGroup fx:id="gender" />
-         </toggleGroup></RadioButton>
+            </toggleGroup>
+        </RadioButton>
         <RadioButton fx:id="rBtnFemale" layoutX="773.0" layoutY="601.0" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
     </children>
 </AnchorPane>
