@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -22,9 +23,9 @@ public class Reservation implements SuperEntity {
     private Date date;
     private String status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Student student;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Room room;
 
 }

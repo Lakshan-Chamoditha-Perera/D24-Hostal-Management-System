@@ -16,7 +16,7 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public Boolean update(Room entity, Session session) {
+    public Boolean update(Room entity, Session session)throws RuntimeException {
         session.update(entity);
         return true;
     }

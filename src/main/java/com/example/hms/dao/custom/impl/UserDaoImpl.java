@@ -3,7 +3,6 @@ package com.example.hms.dao.custom.impl;
 import com.example.hms.dao.custom.UserDao;
 import com.example.hms.entity.User;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -11,48 +10,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Boolean save(User entity, Session session) throws RuntimeException {
-        Transaction transaction = session.getTransaction();
-        try (session) {
-            transaction.begin();
-            session.save(entity);
-            transaction.commit();
-            return true;
-        } catch (RuntimeException exception) {
-            transaction.rollback();
-            throw new RuntimeException(exception);
-        }
+        session.save(entity);
+        return true;
     }
 
     @Override
     public Boolean update(User entity, Session session) throws RuntimeException {
-        Transaction transaction = session.getTransaction();
-        try (session) {
-            transaction.begin();
-            session.update(entity);
-            transaction.commit();
-            return true;
-        } catch (RuntimeException exception) {
-            transaction.rollback();
-            throw new RuntimeException(exception);
-        }
+        session.update(entity);
+        return true;
     }
 
     @Override
-    public Boolean delete(User entity, Session session) throws  RuntimeException {
-        Transaction transaction = session.getTransaction();
-        try (session) {
-            transaction.begin();
-            session.delete(entity);
-            transaction.commit();
-            return true;
-        } catch (RuntimeException exception) {
-            transaction.rollback();
-            throw new RuntimeException(exception);
-        }
+    public Boolean delete(User entity, Session session) throws RuntimeException {
+        session.delete(entity);
+        return true;
     }
 
     @Override
-    public User view(User entity, Session session){
+    public User view(User entity, Session session) {
         try (session) {
             return session.get(User.class, entity.getId());
         }

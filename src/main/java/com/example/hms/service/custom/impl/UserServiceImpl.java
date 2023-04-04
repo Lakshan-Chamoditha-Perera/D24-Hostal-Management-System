@@ -8,6 +8,7 @@ import com.example.hms.entity.User;
 import com.example.hms.service.custom.UserService;
 import com.example.hms.service.util.Converter;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +27,16 @@ public class UserServiceImpl implements UserService {
         user.setPassword(dto.getPassword());
         user.setPasswordHint(dto.getPasswordHint());
 
-        return userDao.save(user, session);
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            userDao.save(user, session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
@@ -36,15 +46,32 @@ public class UserServiceImpl implements UserService {
         user.setPassword(dto.getPassword());
         user.setPasswordHint(dto.getPasswordHint());
 
-        return userDao.update(user, session);
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            userDao.update(user, session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
     public Boolean delete(UserDto dto, Session session) throws RuntimeException {
         User user = new User();
         user.setId(dto.getId());
-
-        return userDao.delete(user, session);
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            userDao.delete(user, session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override

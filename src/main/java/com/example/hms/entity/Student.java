@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -27,7 +28,7 @@ public class Student implements SuperEntity {
     private Date date;
     private String gender;
     @ToString.Exclude
-    @OneToMany(targetEntity = Reservation.class, mappedBy = "student")
+    @OneToMany(targetEntity = Reservation.class, mappedBy = "student",cascade = CascadeType.ALL)
     private List<Reservation> reservationList = new ArrayList<>();
 }
 
