@@ -1,16 +1,17 @@
 package com.example.hms.dao.custom.impl;
 
-import com.example.hms.dao.custom.UserDao;
-import com.example.hms.entity.User;
+import com.example.hms.dao.custom.ReservationDao;
+import com.example.hms.entity.Reservation;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class UserImpl implements UserDao {
+public class ReservationDaoImpl implements ReservationDao {
 
     @Override
-    public Boolean save(User entity, Session session) throws RuntimeException {
+    public Boolean save(Reservation entity, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -24,7 +25,7 @@ public class UserImpl implements UserDao {
     }
 
     @Override
-    public Boolean update(User entity, Session session) throws RuntimeException {
+    public Boolean update(Reservation entity, Session session) {
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -38,7 +39,7 @@ public class UserImpl implements UserDao {
     }
 
     @Override
-    public Boolean delete(User entity, Session session) throws  RuntimeException {
+    public Boolean delete(Reservation entity, Session session) {
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -52,23 +53,22 @@ public class UserImpl implements UserDao {
     }
 
     @Override
-    public User view(User entity, Session session){
-        try (session) {
-            return session.get(User.class, entity.getId());
-        }
+    public Reservation view(Reservation entity, Session session) {
+        return null;
     }
 
     @Override
-    public List getAll(Session session) {
-        try (session) {
-            String sql = "From User";
-            List list = session.createQuery(sql).list();
-            return list;
-        }
+    public List<Reservation> getAll(Session session) {
+        return null;
     }
 
     @Override
     public String getLastId(Session session) {
-        return null;
+        try (session) {
+            Query query = session.createQuery("SELECT res_id FROM Reservation ORDER BY res_id DESC");
+            query.setMaxResults(1);
+            List results = query.list();
+            return (results.size() == 0) ? null : (String) results.get(0);
+        }
     }
 }

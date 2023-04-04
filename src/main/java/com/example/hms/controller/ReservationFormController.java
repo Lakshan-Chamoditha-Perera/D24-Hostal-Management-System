@@ -1,5 +1,6 @@
 package com.example.hms.controller;
 
+import com.example.hms.dto.ReservationDto;
 import com.example.hms.dto.RoomDto;
 import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.RoomService;
@@ -35,10 +36,10 @@ public class ReservationFormController implements Initializable {
     private AnchorPane pane;
 
     @FXML
-    private TableView<?> tblReservations;
+    private TableView<ReservationDto> tblReservations;
 
     @FXML
-    private TableColumn<?, ?> colReservationId;
+    private TableColumn<ReservationDto, String> colReservationId;
 
     @FXML
     private TableColumn<?, ?> colStudentId;
@@ -47,10 +48,10 @@ public class ReservationFormController implements Initializable {
     private TableColumn<?, ?> colDate;
 
     @FXML
-    private TableColumn<?, ?> colRoomType;
+    private TableColumn<ReservationDto, String> colRoomType;
 
     @FXML
-    private TableColumn<?, ?> colStatus;
+    private TableColumn<ReservationDto, String> colStatus;
 
     @FXML
     private TextField txtSearchByStudentId;
@@ -137,7 +138,7 @@ public class ReservationFormController implements Initializable {
         colRoomID.setCellValueFactory(new PropertyValueFactory<>("room_type_id"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colKeyMoney.setCellValueFactory(new PropertyValueFactory<>("key_money"));
-        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"))
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         refreshRoomTable();
         refreshReservationTable();
     }

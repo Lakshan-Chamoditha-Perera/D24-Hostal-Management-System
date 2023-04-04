@@ -8,6 +8,7 @@ import com.example.hms.entity.Room;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.Converter;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,23 +22,50 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Boolean save(RoomDto dto, Session session) throws RuntimeException {
-        return roomDao.save(Converter.getInstance().toRoomEntity(dto), session);
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            roomDao.save(Converter.getInstance().toRoomEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
     public Boolean update(RoomDto dto, Session session) throws RuntimeException {
-        return roomDao.update(Converter.getInstance().toRoomEntity(dto), session);
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            roomDao.update(Converter.getInstance().toRoomEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
     public Boolean delete(RoomDto dto, Session session) throws RuntimeException {
-        return roomDao.delete(Converter.getInstance().toRoomEntity(dto), session);
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            roomDao.delete(Converter.getInstance().toRoomEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
     public RoomDto view(RoomDto dto, Session session) throws RuntimeException {
         Room entity = roomDao.view(Converter.getInstance().toRoomEntity(dto), session);
-        if(entity!=null){
+        if (entity != null) {
             return Converter.getInstance().toRoomDto(entity);
         }
         throw new RuntimeException("Room not found!");

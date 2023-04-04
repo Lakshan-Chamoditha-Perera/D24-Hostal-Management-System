@@ -8,6 +8,7 @@ import com.example.hms.entity.Student;
 import com.example.hms.service.custom.StudentService;
 import com.example.hms.service.util.Converter;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,17 +22,44 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Boolean save(StudentDto dto, Session session) throws RuntimeException {
-        return (studentDao.save(Converter.getInstance().toStudentEntity(dto), session));
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            studentDao.save(Converter.getInstance().toStudentEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException("Student not added");
+        }
     }
 
     @Override
     public Boolean update(StudentDto dto, Session session) {
-        return (studentDao.update(Converter.getInstance().toStudentEntity(dto), session));
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            studentDao.update(Converter.getInstance().toStudentEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException("Student not updated");
+        }
     }
 
     @Override
     public Boolean delete(StudentDto dto, Session session) throws RuntimeException {
-        return (studentDao.delete(Converter.getInstance().toStudentEntity(dto), session));
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            studentDao.delete(Converter.getInstance().toStudentEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException("Student not Deleted");
+        }
     }
 
     @Override
