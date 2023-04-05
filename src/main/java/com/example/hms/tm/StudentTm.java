@@ -1,4 +1,5 @@
-package com.example.hms.to;
+package com.example.hms.tm;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +12,12 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationTm {
-    private String res_id;
-    private Date date;
-    private String status;
+public class StudentTm {
     private String student_id;
-    private String room_id;
+    private String name;
+    private String address;
+    private String contact_no;
+    private Date dob;
+    private String gender;
+
 }

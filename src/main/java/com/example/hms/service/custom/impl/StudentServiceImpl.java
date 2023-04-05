@@ -97,4 +97,13 @@ public class StudentServiceImpl implements StudentService {
             return (String.format("IT%06d", lastDigits));
         }
     }
+
+    @Override
+    public List<StudentDto> getUnpaidStudents(Session session) throws RuntimeException {
+        List<Student> unpaidStudents = queryDao.getUnpaidStudents(session);
+        if (unpaidStudents.size() > 0) {
+            return unpaidStudents.stream().map(student -> Converter.getInstance().toStudentDto(student)).collect(Collectors.toList());
+        }
+        throw new RuntimeException("No any unpaid case yet!");
+    }
 }

@@ -6,7 +6,7 @@ import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.ReservationService;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.ServiceType;
-import com.example.hms.to.ReservationTm;
+import com.example.hms.tm.ReservationTm;
 import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.NavigationFactory;
 import com.example.hms.util.navigation.NavigationType;

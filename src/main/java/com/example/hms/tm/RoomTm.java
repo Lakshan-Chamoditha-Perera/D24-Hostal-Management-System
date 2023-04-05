@@ -1,4 +1,4 @@
-package com.example.hms.to;
+package com.example.hms.tm;
 
 
 import lombok.AllArgsConstructor;
@@ -10,8 +10,10 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserTm {
-    private String id;
-    private String password;
-    private String passwordHint;
+public class RoomTm {
+    private String room_type_id;
+    private String type;
+    private Double key_money;
+    private Integer qty;
+
 }

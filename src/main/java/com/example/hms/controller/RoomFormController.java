@@ -4,7 +4,7 @@ import com.example.hms.dto.RoomDto;
 import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.ServiceType;
-import com.example.hms.to.RoomTm;
+import com.example.hms.tm.RoomTm;
 import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.regex.RegExFactory;
 import com.example.hms.util.regex.RegExType;

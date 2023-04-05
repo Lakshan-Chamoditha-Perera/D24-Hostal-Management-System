@@ -17,7 +17,7 @@
         </ImageView>
         <AnchorPane fx:id="sidePane" layoutX="-37.0" layoutY="14.0" prefHeight="775.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 40;">
             <children>
-                <JFXButton fx:id="btnLogout" layoutX="58.0" layoutY="635.0" onAction="#btnLogoutOnAction" prefHeight="124.0" prefWidth="127.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                <JFXButton fx:id="btnLogout" layoutX="37.0" layoutY="632.0" onAction="#btnLogoutOnAction" prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 15;" text=" ">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -29,7 +29,7 @@
                         </ImageView>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="btnStudents" layoutX="58.0" layoutY="36.0" onAction="#btnStudentsOnAction" prefHeight="124.0" prefWidth="127.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                <JFXButton fx:id="btnStudents" layoutX="38.0" layoutY="39.0" onAction="#btnStudentsOnAction" prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 15;" text=" ">
                     <graphic>
                         <ImageView fitHeight="77.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -41,7 +41,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </JFXButton>
-                <JFXButton fx:id="btnRooms" layoutX="58.0" layoutY="191.0" onAction="#btnRoomsOnAction" prefHeight="124.0" prefWidth="127.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                <JFXButton fx:id="btnRooms" layoutX="36.0" layoutY="193.0" onAction="#btnRoomsOnAction" prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 15;" text=" ">
                     <graphic>
                         <ImageView fitHeight="77.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -53,7 +53,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </JFXButton>
-                <JFXButton fx:id="btnReservation" layoutX="58.0" layoutY="341.0" onAction="#btnReservationOnAction" prefHeight="124.0" prefWidth="127.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                <JFXButton fx:id="btnReservation" layoutX="36.0" layoutY="338.0" onAction="#btnReservationOnAction" prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 15;" text=" ">
                     <graphic>
                         <ImageView fitHeight="77.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -65,7 +65,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </JFXButton>
-                <JFXButton fx:id="btnUser" layoutX="58.0" layoutY="489.0" onAction="#btnUserOnAction" prefHeight="124.0" prefWidth="127.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 10;" text=" ">
+                <JFXButton fx:id="btnUser" layoutX="36.0" layoutY="488.0" onAction="#btnUserOnAction" prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: #ECF2FF; -fx-background-radius: 15;" text=" ">
                     <graphic>
                         <ImageView fitHeight="77.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
                             <image>

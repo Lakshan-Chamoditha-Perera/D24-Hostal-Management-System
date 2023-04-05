@@ -1,5 +1,6 @@
 package com.example.hms.util;
 
+import animatefx.animation.FadeIn;
 import com.example.hms.util.navigation.NavigationType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -62,6 +63,7 @@ public class NavigationFactory {
     }
 
     private void init(String fileName) throws IOException {
+        new FadeIn(panel).play();
         panel.getChildren().add(FXMLLoader.load(getClass().getResource("../view/" + fileName)));
     }
 }
