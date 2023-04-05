@@ -120,6 +120,18 @@ public class ReservationFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        ReservationTm reservationTm = tblReservations.getSelectionModel().getSelectedItem();
+        if (reservationTm != null) {
+            btnDelete.setDisable(false);
+
+            ReservationDto reservationDto = new ReservationDto();
+            reservationDto.setRes_id(reservationTm.getRes_id());
+            //   reservationService.delete(reservationDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+            //   new Alert(Alert.AlertType.ERROR, "Reservation Deleted").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Select Item First").show();
+        }
+        btnDelete.setDisable(true);
 
     }
 
@@ -134,7 +146,10 @@ public class ReservationFormController implements Initializable {
     }
 
     public void tblReservationsOnMouseClicked(MouseEvent mouseEvent) {
-
+        ReservationTm reservationTm = tblReservations.getSelectionModel().getSelectedItem();
+        if (reservationTm != null) {
+            btnDelete.setDisable(false);
+        }
     }
 
     @Override

@@ -7,9 +7,5 @@ import org.hibernate.Transaction;
 public class WrapApp {
     public static void main(String[] args) {
         AppInitializer.main(args);
-
-//        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-//        Transaction transaction = session.getTransaction();
-
     }
 }

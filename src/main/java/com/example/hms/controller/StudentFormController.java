@@ -4,6 +4,7 @@ import com.example.hms.dto.StudentDto;
 import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.StudentService;
 import com.example.hms.service.util.ServiceType;
+import com.example.hms.to.StudentTm;
 import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.regex.RegExFactory;
 import com.example.hms.util.regex.RegExType;
@@ -21,7 +22,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,25 +32,25 @@ public class StudentFormController implements Initializable {
     private AnchorPane pane;
 
     @FXML
-    private TableView<StudentDto> tblStudents;
+    private TableView<StudentTm> tblStudents;
 
     @FXML
-    private TableColumn<StudentDto, String> colStudentId;
+    private TableColumn<StudentTm, String> colStudentId;
 
     @FXML
-    private TableColumn<StudentDto, String> colStudentName;
+    private TableColumn<StudentTm, String> colStudentName;
 
     @FXML
-    private TableColumn<StudentDto, String> colAddress;
+    private TableColumn<StudentTm, String> colAddress;
 
     @FXML
-    private TableColumn<StudentDto, String> colContact;
+    private TableColumn<StudentTm, String> colContact;
 
     @FXML
-    private TableColumn<StudentDto, String> colDob;
+    private TableColumn<StudentTm, Date> colDob;
 
     @FXML
-    private TableColumn<StudentDto, String> colGender;
+    private TableColumn<StudentTm, String> colGender;
 
     @FXML
     private TextField txtId;
@@ -112,10 +112,12 @@ public class StudentFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        StudentDto selectedItem = tblStudents.getSelectionModel().getSelectedItem();
+        StudentTm selectedItem = tblStudents.getSelectionModel().getSelectedItem();
         try {
             if (selectedItem != null) {
-                studentService.delete(selectedItem, FactoryConfiguration.getFactoryConfiguration().getSession());
+                StudentDto studentDto = new StudentDto();
+                studentDto.setStudent_id(selectedItem.getStudent_id());
+                studentService.delete(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
                 new Alert(Alert.AlertType.INFORMATION, "Student Deleted").show();
                 refreshTable();
                 clearAll();
@@ -205,13 +207,13 @@ public class StudentFormController implements Initializable {
     private void refreshTable() {
         try {
             generateStudentId();
-            List all = studentService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
-            ObservableList<StudentDto> studentDtoObservableList = FXCollections.observableArrayList();
-            studentDtoObservableList.addAll(all);
+            List<StudentDto> all = studentService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+            ObservableList<StudentTm> studentDtoObservableList = FXCollections.observableArrayList();
+            all.forEach(dto -> studentDtoObservableList.add(new StudentTm(dto.getStudent_id(), dto.getName(), dto.getAddress(), dto.getContact_no(), dto.getDob(), dto.getGender())));
             tblStudents.setItems(studentDtoObservableList);
         } catch (RuntimeException exception) {
-             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
-             tblStudents.getItems().clear();
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+            tblStudents.getItems().clear();
         }
     }
 
@@ -220,23 +222,22 @@ public class StudentFormController implements Initializable {
     }
 
     public void tblStudentOnMouseClicked(MouseEvent mouseEvent) {
-        StudentDto studentDto = tblStudents.getSelectionModel().getSelectedItem();
+        StudentTm selectedItem = tblStudents.getSelectionModel().getSelectedItem();
         try {
-            if (studentDto != null) {
+            if (selectedItem != null) {
                 btnUpdate.setDisable(false);
                 btnDelete.setDisable(false);
                 btnAdd.setDisable(true);
-//                studentService.view(selectedItem, FactoryConfiguration.getFactoryConfiguration().getSession());
-                txtId.setText(studentDto.getStudent_id());
-                txtName.setText(studentDto.getName());
-                txtAddress.setText(studentDto.getAddress());
-                if (studentDto.getGender().equals("Male")) {
+                txtId.setText(selectedItem.getStudent_id());
+                txtName.setText(selectedItem.getName());
+                txtAddress.setText(selectedItem.getAddress());
+                if (selectedItem.getGender().equals("Male")) {
                     rBtnMale.setSelected(true);
                 } else {
                     rBtnFemale.setSelected(true);
                 }
-                txtContact.setText(studentDto.getContact_no());
-                cmbDob.setValue(studentDto.getDob().toLocalDate());
+                txtContact.setText(selectedItem.getContact_no());
+                cmbDob.setValue(selectedItem.getDob().toLocalDate());
             } else {
                 btnUpdate.setDisable(true);
             }

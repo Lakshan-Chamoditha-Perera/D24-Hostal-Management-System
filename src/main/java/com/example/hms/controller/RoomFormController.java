@@ -4,6 +4,7 @@ import com.example.hms.dto.RoomDto;
 import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.ServiceType;
+import com.example.hms.to.RoomTm;
 import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.regex.RegExFactory;
 import com.example.hms.util.regex.RegExType;
@@ -28,19 +29,19 @@ import java.util.ResourceBundle;
 public class RoomFormController implements Initializable {
 
     @FXML
-    private TableView<RoomDto> tblRooms;
+    private TableView<RoomTm> tblRooms;
 
     @FXML
-    private TableColumn<RoomDto, String> colRoomTypeId;
+    private TableColumn<RoomTm, String> colRoomTypeId;
 
     @FXML
-    private TableColumn<RoomDto, String> colRoomType;
+    private TableColumn<RoomTm, String> colRoomType;
 
     @FXML
-    private TableColumn<RoomDto, Double> colKeyMoney;
+    private TableColumn<RoomTm, Double> colKeyMoney;
 
     @FXML
-    private TableColumn<RoomDto, Integer> colQty;
+    private TableColumn<RoomTm, Integer> colQty;
 
     @FXML
     private TextField txtId;
@@ -184,9 +185,9 @@ public class RoomFormController implements Initializable {
     private void refreshTable() {
         try {
             txtId.setText(roomService.getLastId(FactoryConfiguration.getFactoryConfiguration().getSession()));
-            List all = roomService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
-            ObservableList<RoomDto> roomObservableList = FXCollections.observableArrayList();
-            roomObservableList.addAll(all);
+            List<RoomDto> all = roomService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+            ObservableList<RoomTm> roomObservableList = FXCollections.observableArrayList();
+            all.stream().forEach(dto -> roomObservableList.add(new RoomTm(dto.getRoom_type_id(), dto.getType(), dto.getKey_money(), dto.getQty())));
             tblRooms.setItems(roomObservableList);
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
@@ -195,7 +196,7 @@ public class RoomFormController implements Initializable {
     }
 
     public void tblRoomsOnMouseClicked(MouseEvent mouseEvent) {
-        RoomDto selectedItem = tblRooms.getSelectionModel().getSelectedItem();
+        RoomTm selectedItem = tblRooms.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             btnAdd.setDisable(true);
             btnUpdate.setDisable(false);
@@ -204,7 +205,7 @@ public class RoomFormController implements Initializable {
             txtType.setText(selectedItem.getType());
             txtQty.setText(String.valueOf(selectedItem.getQty()));
             txtKeyMoney.setText(String.valueOf(selectedItem.getKey_money()));
-        }else{
+        } else {
             btnAdd.setDisable(false);
         }
     }

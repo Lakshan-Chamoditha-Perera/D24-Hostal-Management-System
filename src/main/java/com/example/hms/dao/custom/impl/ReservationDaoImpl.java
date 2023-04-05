@@ -2,7 +2,6 @@ package com.example.hms.dao.custom.impl;
 
 import com.example.hms.dao.custom.ReservationDao;
 import com.example.hms.entity.Reservation;
-import com.example.hms.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -33,16 +32,8 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public Boolean delete(Reservation entity, Session session) {
-        Transaction transaction = session.getTransaction();
-        try (session) {
-            transaction.begin();
-            session.delete(entity);
-            transaction.commit();
-            return true;
-        } catch (RuntimeException exception) {
-            transaction.rollback();
-            throw new RuntimeException(exception);
-        }
+        session.delete(entity);
+        return true;
     }
 
     @Override

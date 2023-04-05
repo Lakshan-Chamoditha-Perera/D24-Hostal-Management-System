@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="floatingPane" prefHeight="738.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.AddReservationFormController">
+<AnchorPane fx:id="floatingPane" prefHeight="738.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.ReservationAddFormController">
     <children>
         <ImageView blendMode="MULTIPLY" cache="true" disable="true" fitHeight="738.0" fitWidth="426.0" opacity="0.65" pickOnBounds="true">
             <image>

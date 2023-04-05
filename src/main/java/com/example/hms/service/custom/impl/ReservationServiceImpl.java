@@ -6,7 +6,6 @@ import com.example.hms.dao.custom.RoomDao;
 import com.example.hms.dao.util.DaoTypes;
 import com.example.hms.dto.ReservationDto;
 import com.example.hms.entity.Reservation;
-import com.example.hms.entity.Room;
 import com.example.hms.service.custom.ReservationService;
 import com.example.hms.service.util.Converter;
 import org.hibernate.Session;
@@ -24,6 +23,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservationDao = DaoFactory.getDaoFactory().getDao(DaoTypes.ReservationDao);
         roomDao = DaoFactory.getDaoFactory().getDao(DaoTypes.RoomDao);
     }
+
     @Override
     public Boolean save(ReservationDto dto, Session session) throws RuntimeException {
         Transaction transaction = session.getTransaction();
@@ -45,7 +45,16 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Boolean delete(ReservationDto dto, Session session) {
-        return null;
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            reservationDao.delete(Converter.getInstance().toReservationEntity(dto), session);
+            transaction.commit();
+            return Boolean.TRUE;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override

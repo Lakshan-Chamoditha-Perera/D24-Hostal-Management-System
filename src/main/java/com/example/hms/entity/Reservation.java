@@ -23,7 +23,7 @@ public class Reservation implements SuperEntity {
     private Date date;
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL )
     private Student student;
     @ManyToOne(cascade = CascadeType.ALL)
     private Room room;

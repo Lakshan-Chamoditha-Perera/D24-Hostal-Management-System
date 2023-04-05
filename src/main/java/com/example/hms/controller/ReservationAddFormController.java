@@ -28,7 +28,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddReservationFormController implements Initializable {
+public class ReservationAddFormController implements Initializable {
 
     public Label lblRoomPrice;
     public Label lblReservationId;
