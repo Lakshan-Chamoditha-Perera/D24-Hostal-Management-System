@@ -6,6 +6,9 @@ import com.example.hms.entity.Student;
 import com.example.hms.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
@@ -17,19 +20,16 @@ public class FactoryConfiguration {
     private final SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        Configuration configuration = new Configuration();
-        try {
-            Properties properties = new Properties();
-            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate.properties"));
-            configuration.setProperties(properties);
-        } catch (IOException ignored) {
-        }
-        configuration.configure().
+        StandardServiceRegistryBuilder standardServiceRegistryBuilder = new StandardServiceRegistryBuilder();
+        standardServiceRegistryBuilder.loadProperties("hibernate.properties");
+        MetadataSources metadataSources = new MetadataSources(standardServiceRegistryBuilder.build());
+        metadataSources.
                 addAnnotatedClass(Student.class).
                 addAnnotatedClass(Room.class).
                 addAnnotatedClass(Reservation.class).
                 addAnnotatedClass(User.class);
-        sessionFactory = configuration.buildSessionFactory();
+        Metadata metadata = metadataSources.getMetadataBuilder().build();
+        sessionFactory =  metadata.getSessionFactoryBuilder().build();
     }
 
     public static FactoryConfiguration getFactoryConfiguration() {
