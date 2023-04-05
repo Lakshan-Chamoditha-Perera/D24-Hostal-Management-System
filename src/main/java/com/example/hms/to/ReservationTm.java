@@ -1,4 +1,4 @@
-package com.example.hms.dto;
+package com.example.hms.to;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,18 +7,14 @@ import lombok.ToString;
 
 import java.sql.Date;
 
-
 @ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class ReservationDto implements SuperDto {
+public class ReservationTm {
     private String res_id;
     private Date date;
     private String status;
-    @ToString.Exclude
-    private StudentDto studentDto;
-    @ToString.Exclude
-    private RoomDto roomDto;
+    private String student_id;
+    private String room_id;
 }

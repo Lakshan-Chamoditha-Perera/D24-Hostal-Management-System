@@ -9,8 +9,6 @@ import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.custom.StudentService;
 import com.example.hms.service.util.ServiceType;
 import com.example.hms.util.FactoryConfiguration;
-import com.example.hms.util.regex.RegExFactory;
-import com.example.hms.util.regex.RegExType;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.collections.FXCollections;
@@ -21,8 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -49,13 +45,7 @@ public class AddReservationFormController implements Initializable {
     private Label txtRoomAvailableQty;
 
     @FXML
-    private TextField txtQty;
-
-    @FXML
     private JFXDatePicker txtDate;
-
-    @FXML
-    private Label txtTotal;
 
     @FXML
     private JFXButton btnPayNow;
@@ -84,15 +74,18 @@ public class AddReservationFormController implements Initializable {
                 reservationDto.setStatus(status);
                 reservationDto.setDate(Date.valueOf(txtDate.getValue()));
 
-                StudentDto studentDto = new StudentDto();
-                studentDto.setStudent_id(cmbStdId.getValue());
+                StudentDto tempStd = new StudentDto();
+                tempStd.setStudent_id(cmbStdId.getValue());
+                StudentDto studentDto = studentService.view(tempStd, FactoryConfiguration.getFactoryConfiguration().getSession());
                 reservationDto.setStudentDto(studentDto);
 
-                RoomDto roomDto = new RoomDto();
-                roomDto.setRoom_type_id(cmbRoomId.getValue());
-                reservationDto.setRoomDto(roomDto);
+                RoomDto tempRoom = new RoomDto();
+                tempRoom.setRoom_type_id(cmbRoomId.getValue());
+                RoomDto dto = roomService.view(tempRoom, FactoryConfiguration.getFactoryConfiguration().getSession());
+                dto.setQty(dto.getQty() - 1);
+                reservationDto.setRoomDto(dto);
 
-                Boolean save = reservationService.save(reservationDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                reservationService.save(reservationDto, FactoryConfiguration.getFactoryConfiguration().getSession());
 
                 Stage stage = (Stage) floatingPane.getScene().getWindow();
                 stage.setAlwaysOnTop(false);
@@ -101,10 +94,8 @@ public class AddReservationFormController implements Initializable {
                 stage.close();
             }
         } catch (RuntimeException exception) {
-            exception.printStackTrace();
             Stage stage = (Stage) floatingPane.getScene().getWindow();
             stage.setAlwaysOnTop(false);
-            txtQty.clear();
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).showAndWait();
             stage.setAlwaysOnTop(false);
         }
@@ -171,16 +162,16 @@ public class AddReservationFormController implements Initializable {
                 RoomDto roomDto = new RoomDto();
                 roomDto.setRoom_type_id(selectedItem);
                 RoomDto room = roomService.view(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+
                 lblRoomPrice.setText(String.valueOf(room.getKey_money()));
                 txtRoomAvailableQty.setText(String.valueOf(room.getQty()));
+
                 if (room.getQty() != 0) {
-                    txtQty.setDisable(false);
                     btnPayNow.setDisable(false);
                     btnBook.setDisable(false);
                 } else {
                     btnPayNow.setDisable(true);
                     btnBook.setDisable(true);
-                    txtQty.setDisable(true);
                     throw new RuntimeException("Room not available at the moment!");
                 }
             } else {
@@ -192,7 +183,6 @@ public class AddReservationFormController implements Initializable {
             stage.setAlwaysOnTop(false);
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).showAndWait();
             stage.setAlwaysOnTop(false);
-            txtQty.clear();
         }
     }
 
@@ -209,28 +199,4 @@ public class AddReservationFormController implements Initializable {
         }*/
     }
 
-    public void txtQtyOnKeyReleased(KeyEvent keyEvent) {
-        try {
-            if ((!txtQty.getText().equals("")) && RegExFactory.getInstance().getPattern(RegExType.INTEGER).matcher(txtQty.getText()).matches() && Integer.parseInt(txtQty.getText()) > 0) {
-                if (Integer.parseInt(txtQty.getText()) <= Integer.parseInt(txtRoomAvailableQty.getText())) {
-                    double price = Integer.parseInt(txtQty.getText()) * Double.parseDouble(lblRoomPrice.getText());
-                    txtTotal.setText(String.valueOf(price));
-                    btnBook.setDisable(false);
-                    btnPayNow.setDisable(false);
-                } else {
-                    throw new RuntimeException("Qty must be lower than " + txtRoomAvailableQty.getText());
-                }
-            } else {
-                throw new RuntimeException("Invalid input");
-            }
-        } catch (RuntimeException exception) {
-            Stage stage = (Stage) floatingPane.getScene().getWindow();
-            stage.setAlwaysOnTop(false);
-            txtQty.clear();
-            txtTotal.setText("");
-            new Alert(Alert.AlertType.ERROR, exception.getMessage()).showAndWait();
-            stage.setAlwaysOnTop(false);
-
-        }
-    }
 }

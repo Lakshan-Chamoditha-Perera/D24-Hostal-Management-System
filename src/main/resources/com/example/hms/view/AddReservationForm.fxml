@@ -2,116 +2,84 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.*?>
-<AnchorPane fx:id="floatingPane" prefHeight="738.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.AddReservationFormController">
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="floatingPane" prefHeight="738.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.AddReservationFormController">
     <children>
-        <ImageView blendMode="MULTIPLY" cache="true" disable="true" fitHeight="738.0" fitWidth="426.0" opacity="0.65"
-                   pickOnBounds="true">
+        <ImageView blendMode="MULTIPLY" cache="true" disable="true" fitHeight="738.0" fitWidth="426.0" opacity="0.65" pickOnBounds="true">
             <image>
-                <Image url="@../assets/img_13.png"/>
+                <Image url="@../assets/img_13.png" />
             </image>
         </ImageView>
-        <AnchorPane layoutX="24.0" layoutY="22.0" prefHeight="114.0" prefWidth="377.0"
-                    style="-fx-background-color: #DFF6FF; -fx-background-radius: 30;">
+        <AnchorPane layoutX="24.0" layoutY="22.0" prefHeight="114.0" prefWidth="377.0" style="-fx-background-color: #DFF6FF; -fx-background-radius: 30;">
             <children>
                 <Label layoutX="90.0" layoutY="8.0" text="Reservation">
                     <font>
-                        <Font size="31.0"/>
+                        <Font size="31.0" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="24.0" layoutY="66.0" prefHeight="639.0" prefWidth="377.0"
-                    style="-fx-background-color: white; -fx-background-radius: 30;">
+        <AnchorPane layoutX="24.0" layoutY="66.0" prefHeight="639.0" prefWidth="377.0" style="-fx-background-color: white; -fx-background-radius: 30;">
             <children>
                 <Label layoutX="22.0" layoutY="64.0" text="Student ID">
                     <font>
-                        <Font size="17.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
-                <ComboBox fx:id="cmbRoomId" layoutX="19.0" layoutY="162.0" onAction="#cmbRoomIdOnAction"
-                          prefHeight="51.0" prefWidth="186.0" promptText="click to select"
-                          style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;"/>
-                <ComboBox fx:id="cmbStdId" layoutX="20.0" layoutY="90.0" onAction="#cmbStudentIdOnAction"
-                          prefHeight="39.0" prefWidth="339.0" promptText="click to select"
-                          style="-fx-background-color: #DFF6FF; -fx-background-radius: 10;"/>
+                <ComboBox fx:id="cmbRoomId" layoutX="19.0" layoutY="162.0" onAction="#cmbRoomIdOnAction" prefHeight="51.0" prefWidth="339.0" promptText="click to select" style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;" />
+                <ComboBox fx:id="cmbStdId" layoutX="20.0" layoutY="90.0" onAction="#cmbStudentIdOnAction" prefHeight="39.0" prefWidth="339.0" promptText="click to select" style="-fx-background-color: #DFF6FF; -fx-background-radius: 10;" />
                 <Label layoutX="22.0" layoutY="140.0" text="Room Type">
                     <font>
-                        <Font size="17.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="txtRoomAvailableQty" layoutX="23.0" layoutY="252.0" prefHeight="74.0" prefWidth="339.0"
-                       style="-fx-background-color: #DFF6FF; -fx-background-radius: 20; -fx-text-alignment: right;">
+                <Label fx:id="txtRoomAvailableQty" layoutX="23.0" layoutY="252.0" prefHeight="74.0" prefWidth="339.0" style="-fx-background-color: #DFF6FF; -fx-background-radius: 20; -fx-text-alignment: right;">
                     <font>
-                        <Font size="60.0"/>
+                        <Font size="60.0" />
                     </font>
                 </Label>
                 <Label layoutX="22.0" layoutY="228.0" text="Available Qty">
                     <font>
-                        <Font size="17.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtQty" layoutX="162.0" layoutY="440.0" onKeyReleased="#txtQtyOnKeyReleased"
-                           prefHeight="39.0" prefWidth="198.0"
-                           style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;"/>
-                <Label layoutX="19.0" layoutY="451.0" text="Qty">
-                    <font>
-                        <Font size="17.0"/>
-                    </font>
-                </Label>
-                <JFXDatePicker fx:id="txtDate" defaultColor="#00698f" layoutX="19.0" layoutY="375.0" prefHeight="51.0"
-                               prefWidth="339.0" promptText="click to select"
-                               style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;"/>
+                <JFXDatePicker fx:id="txtDate" defaultColor="#00698f" layoutX="19.0" layoutY="375.0" prefHeight="51.0" prefWidth="339.0" promptText="click to select" style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;" />
                 <Label layoutX="22.0" layoutY="346.0" text="Booking Date">
                     <font>
-                        <Font size="17.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="18.0" layoutY="497.0" text="Total">
-                    <font>
-                        <Font size="32.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="txtTotal" layoutX="147.0" layoutY="498.0" prefHeight="40.0" prefWidth="210.0"
-                       style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;">
-                    <font>
-                        <Font size="32.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
                 <ButtonBar layoutX="43.0" layoutY="573.0" prefHeight="51.0" prefWidth="278.0">
                     <buttons>
-                        <JFXButton fx:id="btnPayNow" onAction="#btnPayNowOnAction" prefHeight="51.0" prefWidth="155.0"
-                                   style="-fx-background-color: #A2D2FF; -fx-background-radius: 10;" text="Pay now"/>
-                        <JFXButton fx:id="btnBook" onAction="#btnBookOnAction" prefHeight="51.0" prefWidth="155.0"
-                                   style="-fx-background-color: #B2A4FF; -fx-background-radius: 10;" text="Book"/>
+                        <JFXButton fx:id="btnPayNow" onAction="#btnPayNowOnAction" prefHeight="51.0" prefWidth="155.0" style="-fx-background-color: #A2D2FF; -fx-background-radius: 10;" text="Pay now" />
+                        <JFXButton fx:id="btnBook" onAction="#btnBookOnAction" prefHeight="51.0" prefWidth="155.0" style="-fx-background-color: #B2A4FF; -fx-background-radius: 10;" text="Book" />
                     </buttons>
                 </ButtonBar>
-                <Label layoutX="218.0" layoutY="138.0" text="Price per room">
+                <Label layoutX="24.0" layoutY="458.0" text="Price per room">
                     <font>
-                        <Font size="17.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblRoomPrice" layoutX="217.0" layoutY="163.0" prefHeight="51.0" prefWidth="135.0"
-                       style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;">
+                <Label fx:id="lblRoomPrice" layoutX="23.0" layoutY="483.0" prefHeight="51.0" prefWidth="330.0" style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;">
                     <font>
-                        <Font size="23.0"/>
+                        <Font size="23.0" />
                     </font>
                 </Label>
                 <Label layoutX="23.0" layoutY="29.0" text="Reservation ID">
                     <font>
-                        <Font size="17.0"/>
+                        <Font size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblReservationId" contentDisplay="CENTER" layoutX="165.0" layoutY="14.0" prefHeight="51.0"
-                       prefWidth="198.0" style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;" text=" "
-                       textAlignment="JUSTIFY">
+                <Label fx:id="lblReservationId" contentDisplay="CENTER" layoutX="165.0" layoutY="14.0" prefHeight="51.0" prefWidth="198.0" style="-fx-background-color: #DFF6FF; -fx-background-radius: 15;" text=" " textAlignment="JUSTIFY">
                     <font>
-                        <Font size="23.0"/>
+                        <Font size="23.0" />
                     </font>
                 </Label>
             </children>

@@ -5,11 +5,10 @@ import com.example.hms.dao.custom.ReservationDao;
 import com.example.hms.dao.custom.RoomDao;
 import com.example.hms.dao.util.DaoTypes;
 import com.example.hms.dto.ReservationDto;
-import com.example.hms.entity.Room;
 import com.example.hms.service.custom.ReservationService;
 import com.example.hms.service.util.Converter;
-import com.example.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -19,24 +18,21 @@ public class ReservationServiceImpl implements ReservationService {
     private final RoomDao roomDao;
 
     public ReservationServiceImpl() {
-
         reservationDao = DaoFactory.getDaoFactory().getDao(DaoTypes.ReservationDao);
         roomDao = DaoFactory.getDaoFactory().getDao(DaoTypes.RoomDao);
     }
-
     @Override
     public Boolean save(ReservationDto dto, Session session) throws RuntimeException {
-        return reservationDao.save(Converter.getInstance().toReservationEntity(dto), session);
-       /* if (save) {
-            Integer qty = dto.getRoomDto().getQty();
-            Room roomEntity = roomDao.view(Converter.getInstance().toRoomEntity(dto.getRoomDto()), FactoryConfiguration.getFactoryConfiguration().getSession());
-            System.out.println(roomEntity);
-            int i = roomEntity.getQty() - qty;
-            roomEntity.setQty(i);
-            System.out.println(roomEntity);
-            return roomDao.update(roomEntity, FactoryConfiguration.getFactoryConfiguration().getSession());
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            reservationDao.save(Converter.getInstance().toReservationEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception.getMessage());
         }
-        throw new RuntimeException("Transaction not success");*/
     }
 
     @Override

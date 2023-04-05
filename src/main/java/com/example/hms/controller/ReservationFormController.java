@@ -32,6 +32,8 @@ import java.util.ResourceBundle;
 
 public class ReservationFormController implements Initializable {
 
+    public JFXButton btnMarkAsPaid;
+    public JFXButton btnViewUnpaidStudent;
     @FXML
     private AnchorPane pane;
 
@@ -139,11 +141,20 @@ public class ReservationFormController implements Initializable {
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colKeyMoney.setCellValueFactory(new PropertyValueFactory<>("key_money"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+
+        colReservationId.setCellValueFactory(new PropertyValueFactory<>("res_id"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colStudentId.setCellValueFactory(new PropertyValueFactory<>("student_id"));
+        colRoomType.setCellValueFactory(new PropertyValueFactory<>("room_id"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+
         refreshRoomTable();
         refreshReservationTable();
     }
 
     private void refreshReservationTable() {
+
     }
 
     private void refreshRoomTable() {
@@ -155,5 +166,13 @@ public class ReservationFormController implements Initializable {
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
         }
+    }
+
+    public void btnMarkAsPaidOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void btnViewUnpaidStudentOnAction(ActionEvent actionEvent) {
+
     }
 }

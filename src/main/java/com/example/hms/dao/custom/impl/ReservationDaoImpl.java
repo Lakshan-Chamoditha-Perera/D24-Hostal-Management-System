@@ -12,16 +12,8 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public Boolean save(Reservation entity, Session session) throws RuntimeException {
-        Transaction transaction = session.getTransaction();
-        try (session) {
-            transaction.begin();
-            session.save(entity);
-            transaction.commit();
-            return true;
-        } catch (RuntimeException exception) {
-            transaction.rollback();
-            throw new RuntimeException(exception);
-        }
+        session.save(entity);
+        return true;
     }
 
     @Override
