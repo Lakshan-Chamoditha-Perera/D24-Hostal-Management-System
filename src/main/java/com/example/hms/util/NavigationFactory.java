@@ -50,7 +50,13 @@ public class NavigationFactory {
                 stage.setTitle("User");
                 init("UserForm.fxml");
                 break;
+
+            case UNPAID_STUDENTS:
+                stage.setTitle("Un-Paid Cases");
+                init("UnpaidCaseForm.fxml");
+                break;
             default:
+
                 throw new RuntimeException("Ui not Implemented!");
         }
     }

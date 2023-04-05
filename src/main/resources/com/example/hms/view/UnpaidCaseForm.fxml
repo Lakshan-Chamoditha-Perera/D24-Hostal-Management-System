@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,17 +9,17 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="727.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.UnpaidCaseFormController">
+<AnchorPane fx:id="pane" prefHeight="727.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.UnpaidCaseFormController">
    <children>
-      <TableView layoutX="14.0" layoutY="123.0" prefHeight="581.0" prefWidth="615.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+      <TableView fx:id="tblStudents" layoutX="14.0" layoutY="123.0" onMouseClicked="#tblStudentsOnMouseClicked" prefHeight="581.0" prefWidth="615.0" style="-fx-background-color: white; -fx-background-radius: 20;">
         <columns>
-          <TableColumn prefWidth="106.0" text="ID" />
-          <TableColumn prefWidth="284.0" text="Name" />
-            <TableColumn prefWidth="88.0" text="Address" />
-            <TableColumn prefWidth="136.0" text="Mobile" />
+          <TableColumn fx:id="colStdId" prefWidth="106.0" text="ID" />
+          <TableColumn fx:id="colStdName" prefWidth="284.0" text="Name" />
+            <TableColumn fx:id="colStdAddress" prefWidth="88.0" text="Address" />
+            <TableColumn fx:id="colMobile" prefWidth="136.0" text="Mobile" />
         </columns>
       </TableView>
-      <Label layoutX="14.0" layoutY="14.0" text="View Un-Paid Students">
+      <Label layoutX="104.0" layoutY="14.0" text="View Un-Paid Students">
          <font>
             <Font size="40.0" />
          </font>
@@ -30,5 +31,10 @@
       </Label>
       <Separator layoutX="14.0" layoutY="65.0" prefHeight="0.0" prefWidth="1054.0" />
       <Separator layoutX="660.0" layoutY="68.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="0.0" />
+      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#btnBackOnAction" prefHeight="49.0" prefWidth="76.0" style="-fx-background-color: #7269f1;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

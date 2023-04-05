@@ -8,6 +8,8 @@ import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.ServiceType;
 import com.example.hms.to.ReservationTm;
 import com.example.hms.util.FactoryConfiguration;
+import com.example.hms.util.NavigationFactory;
+import com.example.hms.util.navigation.NavigationType;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -194,7 +196,7 @@ public class ReservationFormController implements Initializable {
 
     }
 
-    public void btnViewUnpaidStudentOnAction(ActionEvent actionEvent) {
-
+    public void btnViewUnpaidStudentOnAction(ActionEvent actionEvent) throws IOException {
+        NavigationFactory.getInstance().navigate(NavigationType.UNPAID_STUDENTS, pane);
     }
 }
