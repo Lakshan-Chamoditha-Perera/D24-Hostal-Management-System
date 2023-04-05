@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.hms.controller.UnpaidCaseFormController"
-            prefHeight="727.0" prefWidth="1089.0">
+<?import javafx.scene.text.Font?>
 
+
+<AnchorPane prefHeight="727.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.UnpaidCaseFormController">
+   <children>
+      <TableView layoutX="14.0" layoutY="123.0" prefHeight="581.0" prefWidth="615.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+        <columns>
+          <TableColumn prefWidth="106.0" text="ID" />
+          <TableColumn prefWidth="284.0" text="Name" />
+            <TableColumn prefWidth="88.0" text="Address" />
+            <TableColumn prefWidth="136.0" text="Mobile" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="View Un-Paid Students">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="85.0" text="Students List">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="65.0" prefHeight="0.0" prefWidth="1054.0" />
+      <Separator layoutX="660.0" layoutY="68.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="0.0" />
+   </children>
 </AnchorPane>
