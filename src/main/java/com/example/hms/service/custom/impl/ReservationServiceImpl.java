@@ -5,12 +5,15 @@ import com.example.hms.dao.custom.ReservationDao;
 import com.example.hms.dao.custom.RoomDao;
 import com.example.hms.dao.util.DaoTypes;
 import com.example.hms.dto.ReservationDto;
+import com.example.hms.entity.Reservation;
+import com.example.hms.entity.Room;
 import com.example.hms.service.custom.ReservationService;
 import com.example.hms.service.util.Converter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReservationServiceImpl implements ReservationService {
 
@@ -52,7 +55,11 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<ReservationDto> getAll(Session session) {
-        return null;
+        List<Reservation> reservationDtoList = reservationDao.getAll(session);
+        if (reservationDtoList.size() > 0) {
+            return reservationDtoList.stream().map(reservation -> Converter.getInstance().toReservationDto(reservation)).collect(Collectors.toList());
+        }
+        throw new RuntimeException("Empty Room list!");
     }
 
     @Override

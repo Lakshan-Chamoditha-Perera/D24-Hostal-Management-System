@@ -80,7 +80,7 @@ public class Converter {
         return entity;
     }
 
-    public ReservationDto toReservationEntity(Reservation entity) {
+    public ReservationDto toReservationDto(Reservation entity) {
         ReservationDto dto = new ReservationDto();
         dto.setRes_id(entity.getRes_id());
         dto.setStudentDto(toStudentDto(entity.getStudent()));

@@ -2,6 +2,7 @@ package com.example.hms.dao.custom.impl;
 
 import com.example.hms.dao.custom.ReservationDao;
 import com.example.hms.entity.Reservation;
+import com.example.hms.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -51,7 +52,12 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public List<Reservation> getAll(Session session) {
-        return null;
+        try (session) {
+            String sql = "From Reservation";
+            Query query = session.createQuery(sql);
+            List<Reservation> list = query.list();
+            return list;
+        }
     }
 
     @Override
