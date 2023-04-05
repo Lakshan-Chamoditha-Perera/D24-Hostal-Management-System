@@ -1,6 +1,7 @@
 package com.example.hms.service.custom.impl;
 
 import com.example.hms.dao.DaoFactory;
+import com.example.hms.dao.custom.QueryDao;
 import com.example.hms.dao.custom.StudentDao;
 import com.example.hms.dao.util.DaoTypes;
 import com.example.hms.dto.StudentDto;
@@ -15,9 +16,11 @@ import java.util.stream.Collectors;
 
 public class StudentServiceImpl implements StudentService {
     private final StudentDao studentDao;
+    private final QueryDao queryDao;
 
     public StudentServiceImpl() {
         studentDao = DaoFactory.getDaoFactory().getDao(DaoTypes.StudentsDao);
+        queryDao = DaoFactory.getDaoFactory().getDao(DaoTypes.QueryDao);
     }
 
     @Override

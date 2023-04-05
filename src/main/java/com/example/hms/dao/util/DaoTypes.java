@@ -4,5 +4,6 @@ public enum DaoTypes {
     ReservationDao,
     RoomDao,
     StudentsDao,
-    UserDao
+    UserDao,
+    QueryDao
 }

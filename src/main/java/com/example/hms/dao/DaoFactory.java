@@ -1,9 +1,6 @@
 package com.example.hms.dao;
 
-import com.example.hms.dao.custom.impl.ReservationDaoImpl;
-import com.example.hms.dao.custom.impl.RoomDaoImpl;
-import com.example.hms.dao.custom.impl.StudentDaoImpl;
-import com.example.hms.dao.custom.impl.UserDaoImpl;
+import com.example.hms.dao.custom.impl.*;
 import com.example.hms.dao.util.DaoTypes;
 import com.example.hms.dao.util.exception.DaoNotFoundException;
 
@@ -27,6 +24,8 @@ public class DaoFactory {
                 return (T) new StudentDaoImpl();
             case ReservationDao:
                 return (T) new ReservationDaoImpl();
+            case QueryDao:
+                return (T) new QueryDaoImpl();
             default:
                 throw new DaoNotFoundException();
         }

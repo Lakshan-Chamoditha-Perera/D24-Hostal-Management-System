@@ -1,5 +1,6 @@
 package com.example.hms.controller;
 
+import com.example.hms.dao.custom.QueryDao;
 import com.example.hms.util.NavigationFactory;
 import com.example.hms.util.navigation.NavigationType;
 import javafx.event.ActionEvent;
@@ -32,6 +33,8 @@ public class UnpaidCaseFormController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> colMobile;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
