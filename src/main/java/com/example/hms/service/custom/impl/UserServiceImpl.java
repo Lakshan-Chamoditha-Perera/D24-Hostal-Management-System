@@ -7,6 +7,7 @@ import com.example.hms.dto.UserDto;
 import com.example.hms.entity.User;
 import com.example.hms.service.custom.UserService;
 import com.example.hms.service.util.Converter;
+import com.example.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,7 +22,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean save(UserDto dto, Session session) throws RuntimeException {
+    public Boolean save(UserDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         User user = new User();
         user.setId(dto.getId());
         user.setPassword(dto.getPassword());
@@ -40,7 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean update(UserDto dto, Session session) throws RuntimeException {
+    public Boolean update(UserDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         User user = new User();
         user.setId(dto.getId());
         user.setPassword(dto.getPassword());
@@ -59,7 +62,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean delete(UserDto dto, Session session) throws RuntimeException {
+    public Boolean delete(UserDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         User user = new User();
         user.setId(dto.getId());
         Transaction transaction = session.getTransaction();
@@ -75,7 +79,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto view(UserDto dto, Session session) throws RuntimeException {
+    public UserDto view(UserDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         User user = new User();
         user.setId(dto.getId());
 
@@ -91,7 +96,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAll(Session session) throws RuntimeException {
+    public List<UserDto> getAll() throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         List<User> allUsers = userDao.getAll(session);
         if (allUsers.size() > 0) {
             return allUsers.stream().map(user -> Converter.getInstance().toUserDto(user)).collect(Collectors.toList());
@@ -100,7 +106,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getLastId(Session session) {
+    public String getLastId() {
         return null;
     }
 }
