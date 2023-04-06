@@ -21,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 
 import java.net.URL;
 import java.sql.Date;
@@ -85,7 +86,9 @@ public class ReservationAddFormController implements Initializable {
                 dto.setQty(dto.getQty() - 1);
                 reservationDto.setRoomDto(dto);
 
-                reservationService.save(reservationDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                Session session =FactoryConfiguration.getFactoryConfiguration().getSession();
+                reservationService.save(reservationDto,session);
+                //System.out.println(session.isConnected());
 
                 Stage stage = (Stage) floatingPane.getScene().getWindow();
                 stage.setAlwaysOnTop(false);

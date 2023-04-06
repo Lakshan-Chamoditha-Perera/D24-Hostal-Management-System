@@ -9,8 +9,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -86,6 +90,14 @@ public class DashboardController implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
+
+//        try {
+//            TextField txtId = (TextField) new Scene(FXMLLoader.load(getClass().getResource("../view/LoginPage.fxml"))).lookup("txtId");
+//            System.out.println(txtId.getText());
+//        } catch (IOException e) {
+////            throw new RuntimeException(e);
+//            e.printStackTrace();
+//        }
 
     }
 }

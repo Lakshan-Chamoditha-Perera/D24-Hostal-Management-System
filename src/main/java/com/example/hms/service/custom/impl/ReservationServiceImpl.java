@@ -8,6 +8,7 @@ import com.example.hms.dto.ReservationDto;
 import com.example.hms.entity.Reservation;
 import com.example.hms.service.custom.ReservationService;
 import com.example.hms.service.util.Converter;
+import com.example.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -25,7 +26,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Boolean save(ReservationDto dto, Session session) throws RuntimeException {
+    public Boolean save(ReservationDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -39,12 +41,13 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Boolean update(ReservationDto dto, Session session) {
+    public Boolean update(ReservationDto dto) {
         return null;
     }
 
     @Override
-    public Boolean delete(ReservationDto dto, Session session) {
+    public Boolean delete(ReservationDto dto) {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -58,12 +61,13 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationDto view(ReservationDto dto, Session session) {
+    public ReservationDto view(ReservationDto dto) {
         return null;
     }
 
     @Override
-    public List<ReservationDto> getAll(Session session) {
+    public List<ReservationDto> getAll() {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         List<Reservation> reservationDtoList = reservationDao.getAll(session);
         if (reservationDtoList.size() > 0) {
             return reservationDtoList.stream().map(reservation -> Converter.getInstance().toReservationDto(reservation)).collect(Collectors.toList());
@@ -72,7 +76,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public String getLastId(Session session) {
+    public String getLastId() {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         String lastId = reservationDao.getLastId(session);
         if (lastId == null) {
             return "REC-000001";

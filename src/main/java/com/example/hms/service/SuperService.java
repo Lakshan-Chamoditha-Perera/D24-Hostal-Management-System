@@ -7,14 +7,14 @@ import org.hibernate.Session;
 import java.util.List;
 
 public interface SuperService<T extends SuperDto> {
-    Boolean save(T entity, Session session);
+    Boolean save(T entity);
 
-    Boolean update(T entity, Session session);
+    Boolean update(T entity);
 
-    Boolean delete(T entity, Session session);
+    Boolean delete(T entity);
 
-    T view(T entity, Session session) throws RuntimeException;
+    T view(T entity) throws RuntimeException;
 
-    List<T> getAll(Session session);
-    String getLastId(Session session);
+    List<T> getAll();
+    String getLastId();
 }

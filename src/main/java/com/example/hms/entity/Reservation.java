@@ -22,9 +22,10 @@ public class Reservation implements SuperEntity {
     private String res_id;
     private Date date;
     private String status;
-
+    @ToString.Exclude
     @ManyToOne(cascade = CascadeType.ALL )
     private Student student;
+    @ToString.Exclude
     @ManyToOne(cascade = CascadeType.ALL)
     private Room room;
 

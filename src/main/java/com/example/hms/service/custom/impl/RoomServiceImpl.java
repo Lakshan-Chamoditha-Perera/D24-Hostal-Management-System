@@ -7,6 +7,7 @@ import com.example.hms.dto.RoomDto;
 import com.example.hms.entity.Room;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.Converter;
+import com.example.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,7 +22,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Boolean save(RoomDto dto, Session session) throws RuntimeException {
+    public Boolean save(RoomDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -35,7 +37,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Boolean update(RoomDto dto, Session session) throws RuntimeException {
+    public Boolean update(RoomDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -49,7 +52,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Boolean delete(RoomDto dto, Session session) throws RuntimeException {
+    public Boolean delete(RoomDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -63,7 +67,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto view(RoomDto dto, Session session) throws RuntimeException {
+    public RoomDto view(RoomDto dto) throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Room entity = roomDao.view(Converter.getInstance().toRoomEntity(dto), session);
         if (entity != null) {
             return Converter.getInstance().toRoomDto(entity);
@@ -72,7 +77,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<RoomDto> getAll(Session session) throws RuntimeException {
+    public List<RoomDto> getAll() throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         List<Room> roomList = roomDao.getAll(session);
         if (roomList.size() > 0) {
             return roomList.stream().map(room -> Converter.getInstance().toRoomDto(room)).collect(Collectors.toList());
@@ -81,7 +87,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public String getLastId(Session session) throws RuntimeException {
+    public String getLastId() throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         String lastId = roomDao.getLastId(session);
         if (lastId == null) {
             return "RM-0001";

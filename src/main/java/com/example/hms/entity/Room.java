@@ -27,6 +27,6 @@ public class Room implements SuperEntity {
     private Double key_money;
     private Integer qty;
     @ToString.Exclude
-    @OneToMany(mappedBy = "room", targetEntity = Reservation.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", targetEntity = Reservation.class)
     List<Reservation> reservationList = new ArrayList<>();
 }

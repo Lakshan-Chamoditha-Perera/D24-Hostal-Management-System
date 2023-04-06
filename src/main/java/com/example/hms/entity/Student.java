@@ -28,7 +28,7 @@ public class Student implements SuperEntity {
     private Date date;
     private String gender;
     @ToString.Exclude
-    @OneToMany(targetEntity = Reservation.class, mappedBy = "student",cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Reservation.class, mappedBy = "student")
     private List<Reservation> reservationList = new ArrayList<>();
 }
 
