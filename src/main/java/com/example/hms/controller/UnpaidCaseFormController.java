@@ -61,7 +61,7 @@ public class UnpaidCaseFormController implements Initializable {
 
     private void refreshUnpaidStudentTable() {
         try {
-            List<StudentDto> list = studentService.getUnpaidStudents(FactoryConfiguration.getFactoryConfiguration().getSession());
+            List<StudentDto> list = studentService.getUnpaidStudents();
             ObservableList<StudentTm> stdTmList = FXCollections.observableArrayList();
             for (StudentDto ele : list) {
                 StudentTm studentTm = new StudentTm();

@@ -77,17 +77,16 @@ public class ReservationAddFormController implements Initializable {
 
                 StudentDto tempStd = new StudentDto();
                 tempStd.setStudent_id(cmbStdId.getValue());
-                StudentDto studentDto = studentService.view(tempStd, FactoryConfiguration.getFactoryConfiguration().getSession());
+                StudentDto studentDto = studentService.view(tempStd);
                 reservationDto.setStudentDto(studentDto);
 
                 RoomDto tempRoom = new RoomDto();
                 tempRoom.setRoom_type_id(cmbRoomId.getValue());
-                RoomDto dto = roomService.view(tempRoom, FactoryConfiguration.getFactoryConfiguration().getSession());
+                RoomDto dto = roomService.view(tempRoom);
                 dto.setQty(dto.getQty() - 1);
                 reservationDto.setRoomDto(dto);
 
-                Session session =FactoryConfiguration.getFactoryConfiguration().getSession();
-                reservationService.save(reservationDto,session);
+                reservationService.save(reservationDto);
                 //System.out.println(session.isConnected());
 
                 Stage stage = (Stage) floatingPane.getScene().getWindow();
@@ -134,7 +133,7 @@ public class ReservationAddFormController implements Initializable {
 
     private void setRoomList() {
         try {
-            List<RoomDto> roomDtoList = roomService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+            List<RoomDto> roomDtoList = roomService.getAll();
             ObservableList<String> roomIdObservableList = FXCollections.observableArrayList();
             for (RoomDto room : roomDtoList) roomIdObservableList.add(room.getRoom_type_id());
             cmbRoomId.setItems(roomIdObservableList);
@@ -145,7 +144,7 @@ public class ReservationAddFormController implements Initializable {
 
     private void setStudentList() {
         try {
-            List<StudentDto> studentDtoList = studentService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+            List<StudentDto> studentDtoList = studentService.getAll();
             ObservableList<String> studentIdObservableList = FXCollections.observableArrayList();
             for (StudentDto studentDto : studentDtoList) studentIdObservableList.add(studentDto.getStudent_id());
             cmbStdId.setItems(studentIdObservableList);
@@ -155,7 +154,7 @@ public class ReservationAddFormController implements Initializable {
     }
 
     private void setReservationId() {
-        lblReservationId.setText(reservationService.getLastId(FactoryConfiguration.getFactoryConfiguration().getSession()));
+        lblReservationId.setText(reservationService.getLastId());
     }
 
     public void cmbRoomIdOnAction(ActionEvent actionEvent) {
@@ -164,7 +163,7 @@ public class ReservationAddFormController implements Initializable {
             if (selectedItem != null) {
                 RoomDto roomDto = new RoomDto();
                 roomDto.setRoom_type_id(selectedItem);
-                RoomDto room = roomService.view(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                RoomDto room = roomService.view(roomDto);
 
                 lblRoomPrice.setText(String.valueOf(room.getKey_money()));
                 txtRoomAvailableQty.setText(String.valueOf(room.getQty()));

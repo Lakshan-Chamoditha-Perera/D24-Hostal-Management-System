@@ -98,7 +98,7 @@ public class StudentFormController implements Initializable {
                 studentDto.setContact_no(txtContact.getText());
                 studentDto.setDob(Date.valueOf(cmbDob.getValue()));
 
-                studentService.save(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                studentService.save(studentDto);
                 new Alert(Alert.AlertType.INFORMATION, "Student Added").show();
                 clearAll();
                 refreshTable();
@@ -117,7 +117,7 @@ public class StudentFormController implements Initializable {
             if (selectedItem != null) {
                 StudentDto studentDto = new StudentDto();
                 studentDto.setStudent_id(selectedItem.getStudent_id());
-                studentService.delete(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                studentService.delete(studentDto);
                 new Alert(Alert.AlertType.INFORMATION, "Student Deleted").show();
                 refreshTable();
                 clearAll();
@@ -146,7 +146,7 @@ public class StudentFormController implements Initializable {
                 studentDto.setContact_no(txtContact.getText());
                 studentDto.setDob(Date.valueOf(cmbDob.getValue()));
 
-                studentService.update(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                studentService.update(studentDto);
                 new Alert(Alert.AlertType.INFORMATION, "Student Updated").show();
 
                 clearAll();
@@ -207,7 +207,7 @@ public class StudentFormController implements Initializable {
     private void refreshTable() {
         try {
             generateStudentId();
-            List<StudentDto> all = studentService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+            List<StudentDto> all = studentService.getAll();
             ObservableList<StudentTm> studentDtoObservableList = FXCollections.observableArrayList();
             all.forEach(dto -> studentDtoObservableList.add(new StudentTm(dto.getStudent_id(), dto.getName(), dto.getAddress(), dto.getContact_no(), dto.getDob(), dto.getGender())));
             tblStudents.setItems(studentDtoObservableList);
@@ -218,7 +218,7 @@ public class StudentFormController implements Initializable {
     }
 
     private void generateStudentId() {
-        txtId.setText(studentService.getLastId(FactoryConfiguration.getFactoryConfiguration().getSession()));
+        txtId.setText(studentService.getLastId());
     }
 
     public void tblStudentOnMouseClicked(MouseEvent mouseEvent) {

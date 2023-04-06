@@ -101,14 +101,14 @@ public class UserFormController implements Initializable {
     }
 
     private void refreshTable() {
-       try{
-           List<UserDto> allUsers = userService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
-           ObservableList<UserDto> observableList = FXCollections.observableArrayList();
-           observableList.addAll(allUsers);
-           tblUsers.setItems(observableList);
-       }catch (RuntimeException e){
-           new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-       }
+        try {
+            List<UserDto> allUsers = userService.getAll();
+            ObservableList<UserDto> observableList = FXCollections.observableArrayList();
+            observableList.addAll(allUsers);
+            tblUsers.setItems(observableList);
+        } catch (RuntimeException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 

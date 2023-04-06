@@ -179,14 +179,14 @@ public class ReservationFormController implements Initializable {
     }
 
     private void refreshReservationTable() throws RuntimeException {
-        List<ReservationDto> all = reservationService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+        List<ReservationDto> all = reservationService.getAll();
         ObservableList<ReservationTm> observableList = FXCollections.observableArrayList();
         all.stream().map(dto -> observableList.add(new ReservationTm(dto.getRes_id(), dto.getDate(), dto.getStatus(), dto.getStudentDto().getStudent_id(), dto.getRoomDto().getRoom_type_id()))).collect(Collectors.toList());
         tblReservations.setItems(observableList);
     }
 
     private void refreshRoomTable() throws RuntimeException {
-        List<RoomDto> all = roomService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+        List<RoomDto> all = roomService.getAll();
         ObservableList<RoomDto> roomObservableList = FXCollections.observableArrayList();
         roomObservableList.addAll(all);
         tblRoom.setItems(roomObservableList);

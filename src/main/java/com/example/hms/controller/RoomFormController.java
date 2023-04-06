@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class  RoomFormController implements Initializable {
+public class RoomFormController implements Initializable {
 
     @FXML
     private TableView<RoomTm> tblRooms;
@@ -78,7 +78,7 @@ public class  RoomFormController implements Initializable {
                 roomDto.setKey_money(Double.valueOf(txtKeyMoney.getText()));
                 roomDto.setQty(Integer.valueOf(txtQty.getText()));
 
-                roomService.save(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                roomService.save(roomDto);
                 new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
 
                 refreshTable();
@@ -110,7 +110,7 @@ public class  RoomFormController implements Initializable {
                 RoomDto roomDto = new RoomDto();
                 roomDto.setRoom_type_id(txtId.getText());
 
-                roomService.delete(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                roomService.delete(roomDto);
                 new Alert(Alert.AlertType.INFORMATION, "Room Deleted").show();
 
                 refreshTable();
@@ -138,7 +138,7 @@ public class  RoomFormController implements Initializable {
                     roomDto.setKey_money(Double.valueOf(txtKeyMoney.getText()));
                     roomDto.setQty(Integer.valueOf(txtQty.getText()));
 
-                    roomService.update(roomDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+                    roomService.update(roomDto);
                     new Alert(Alert.AlertType.INFORMATION, "Room Updated").show();
 
                     refreshTable();
@@ -184,8 +184,8 @@ public class  RoomFormController implements Initializable {
 
     private void refreshTable() {
         try {
-            txtId.setText(roomService.getLastId(FactoryConfiguration.getFactoryConfiguration().getSession()));
-            List<RoomDto> all = roomService.getAll(FactoryConfiguration.getFactoryConfiguration().getSession());
+            txtId.setText(roomService.getLastId());
+            List<RoomDto> all = roomService.getAll();
             ObservableList<RoomTm> roomObservableList = FXCollections.observableArrayList();
             all.stream().forEach(dto -> roomObservableList.add(new RoomTm(dto.getRoom_type_id(), dto.getType(), dto.getKey_money(), dto.getQty())));
             tblRooms.setItems(roomObservableList);

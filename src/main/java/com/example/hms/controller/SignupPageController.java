@@ -48,8 +48,7 @@ public class SignupPageController implements Initializable {
             window.setAlwaysOnTop(false);
             if (checkRegEx()) {
                 UserDto userDto = new UserDto(txtUsername.getText(), txtPassword.getText(), txtPasswordHint.getText());
-                Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-                userService.save(userDto, session);
+                userService.save(userDto);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Registration Success! ");
                 alert.showAndWait();
                 clear();
@@ -70,9 +69,7 @@ public class SignupPageController implements Initializable {
     }
 
     private boolean checkRegEx() throws RuntimeException {
-        return regExFactory.getPattern(RegExType.NAME).matcher(txtUsername.getText()).matches() &&
-                regExFactory.getPattern(RegExType.PASSWORD).matcher(txtPassword.getText()).matches() &&
-                txtPassword.getText().equals(txtRptPassword.getText());
+        return regExFactory.getPattern(RegExType.NAME).matcher(txtUsername.getText()).matches() && regExFactory.getPattern(RegExType.PASSWORD).matcher(txtPassword.getText()).matches() && txtPassword.getText().equals(txtRptPassword.getText());
     }
 
     @Override

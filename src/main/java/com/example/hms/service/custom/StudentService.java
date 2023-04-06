@@ -9,5 +9,5 @@ import org.hibernate.Session;
 import java.util.List;
 
 public interface StudentService extends SuperService <StudentDto> {
-    List getUnpaidStudents();
+    List <StudentDto>getUnpaidStudents();
 }
