@@ -8,6 +8,7 @@ import com.example.hms.dto.StudentDto;
 import com.example.hms.entity.Student;
 import com.example.hms.service.custom.StudentService;
 import com.example.hms.service.util.Converter;
+import com.example.hms.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -24,7 +25,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean save(StudentDto dto, Session session) throws RuntimeException {
+    public Boolean save(StudentDto dto) throws RuntimeException {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -38,7 +41,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean update(StudentDto dto, Session session) {
+    public Boolean update(StudentDto dto) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -52,7 +57,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean delete(StudentDto dto, Session session) throws RuntimeException {
+    public Boolean delete(StudentDto dto) throws RuntimeException {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
@@ -66,7 +73,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDto view(StudentDto dto, Session session) {
+    public StudentDto view(StudentDto dto) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         try (session) {
             Student student = studentDao.view(Converter.getInstance().toStudentEntity(dto), session);
             if (student != null) return Converter.getInstance().toStudentDto(student);
@@ -77,7 +86,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDto> getAll(Session session) throws RuntimeException {
+    public List<StudentDto> getAll() throws RuntimeException {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         List<Student> studentList = studentDao.getAll(session);
         if (studentList.size() > 0) {
             return studentList.stream().map(student -> Converter.getInstance().toStudentDto(student)).collect(Collectors.toList());
@@ -86,7 +97,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String getLastId(Session session) {
+    public String getLastId() {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         String lastId = studentDao.getLastId(session);
         if (lastId == null) {
             return "IT000001";
@@ -99,7 +112,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDto> getUnpaidStudents(Session session) throws RuntimeException {
+    public List<StudentDto> getUnpaidStudents() throws RuntimeException {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         List<Student> unpaidStudents = queryDao.getUnpaidStudents(session);
         if (unpaidStudents.size() > 0) {
             return unpaidStudents.stream().map(student -> Converter.getInstance().toStudentDto(student)).collect(Collectors.toList());
