@@ -200,9 +200,7 @@ public class ReservationFormController implements Initializable {
         try {
             ReservationTm selectedItem = tblReservations.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                ReservationDto reservationDto = new ReservationDto();
-                reservationDto.setRes_id(selectedItem.getRes_id());
-                ReservationDto dto = reservationService.view(reservationDto);
+                ReservationDto dto = reservationService.view(selectedItem.getRes_id());
                 dto.setStatus("paid");
                 reservationService.update(dto);
                 new Alert(Alert.AlertType.INFORMATION, "Payment updated").show();

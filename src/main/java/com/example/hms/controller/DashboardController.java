@@ -12,10 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -60,7 +63,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     void btnReservationOnAction(ActionEvent event) throws IOException {
-
         NavigationFactory.getInstance().navigate(NavigationType.RESERVATION, pane);
 
     }
@@ -77,7 +79,20 @@ public class DashboardController implements Initializable {
 
     @FXML
     void btnUserOnAction(ActionEvent event) throws IOException {
-        NavigationFactory.getInstance().navigate(NavigationType.USER, pane);
+
+        URL resource =getClass().getResource("../view/UserCredentialForm.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(resource);
+        UserCredentialFormController controller = fxmlLoader.getController();
+        controller.init(this);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setAlwaysOnTop(true);
+        stage.centerOnScreen();
+        stage.requestFocus();
+        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.showAndWait();
+//        NavigationFactory.getInstance().navigate(NavigationType.DASHBOARD, mainPane);
     }
 
     @Override

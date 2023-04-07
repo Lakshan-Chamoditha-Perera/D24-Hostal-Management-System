@@ -5,7 +5,6 @@ import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.StudentService;
 import com.example.hms.service.util.ServiceType;
 import com.example.hms.tm.StudentTm;
-import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.NavigationFactory;
 import com.example.hms.util.navigation.NavigationType;
 import javafx.collections.FXCollections;

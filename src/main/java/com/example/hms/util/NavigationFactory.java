@@ -1,5 +1,6 @@
 package com.example.hms.util;
 
+import animatefx.animation.BounceOutDown;
 import animatefx.animation.FadeIn;
 import animatefx.animation.Pulse;
 import com.example.hms.util.navigation.NavigationType;

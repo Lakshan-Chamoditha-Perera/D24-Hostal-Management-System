@@ -75,14 +75,10 @@ public class ReservationAddFormController implements Initializable {
                 reservationDto.setStatus(status);
                 reservationDto.setDate(Date.valueOf(txtDate.getValue()));
 
-                StudentDto tempStd = new StudentDto();
-                tempStd.setStudent_id(cmbStdId.getValue());
-                StudentDto studentDto = studentService.view(tempStd);
+                StudentDto studentDto = studentService.view(cmbStdId.getValue());
                 reservationDto.setStudentDto(studentDto);
 
-                RoomDto tempRoom = new RoomDto();
-                tempRoom.setRoom_type_id(cmbRoomId.getValue());
-                RoomDto dto = roomService.view(tempRoom);
+                RoomDto dto = roomService.view(cmbRoomId.getValue());
                 dto.setQty(dto.getQty() - 1);
                 reservationDto.setRoomDto(dto);
 
@@ -161,10 +157,7 @@ public class ReservationAddFormController implements Initializable {
         try {
             String selectedItem = cmbRoomId.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                RoomDto roomDto = new RoomDto();
-                roomDto.setRoom_type_id(selectedItem);
-                RoomDto room = roomService.view(roomDto);
-
+                RoomDto room = roomService.view(selectedItem);
                 lblRoomPrice.setText(String.valueOf(room.getKey_money()));
                 txtRoomAvailableQty.setText(String.valueOf(room.getQty()));
 

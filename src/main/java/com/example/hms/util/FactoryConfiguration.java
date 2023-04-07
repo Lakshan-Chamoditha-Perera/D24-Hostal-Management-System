@@ -20,6 +20,7 @@ public class FactoryConfiguration {
     private final SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
+        
         StandardServiceRegistryBuilder standardServiceRegistryBuilder = new StandardServiceRegistryBuilder();
         standardServiceRegistryBuilder.loadProperties("hibernate.properties");
         MetadataSources metadataSources = new MetadataSources(standardServiceRegistryBuilder.build());
