@@ -74,11 +74,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDto view(String id) {
-
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-        temp.setStudent_id(id);
         try (session) {
-            Student student = studentDao.view(temp, session);
+            Student student = studentDao.view(id, session);
             if (student != null) return Converter.getInstance().toStudentDto(student);
             throw new RuntimeException("Student not found");
         } catch (RuntimeException exception) {

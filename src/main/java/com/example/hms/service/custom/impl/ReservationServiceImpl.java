@@ -75,7 +75,7 @@ public class ReservationServiceImpl implements ReservationService {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
 //        Transaction transaction = session.getTransaction();
         try (session) {
-            return Converter.getInstance().toReservationDto(reservationDao.view(Converter.getInstance().toReservationEntity(dto), session));
+            return Converter.getInstance().toReservationDto(reservationDao.view(id, session));
         } catch (RuntimeException exception) {
             throw new RuntimeException(exception);
         }

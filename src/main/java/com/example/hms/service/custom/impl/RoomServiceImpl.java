@@ -69,7 +69,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDto view(String id) throws RuntimeException {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-        Room entity = roomDao.view(room, session);
+        Room entity = roomDao.view(id, session);
         if (entity != null) {
             return Converter.getInstance().toRoomDto(entity);
         }

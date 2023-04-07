@@ -79,10 +79,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto view(UserDto dto) throws RuntimeException {
+    public UserDto view(String id) throws RuntimeException {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-        User entity = userDao.view(user, session);
+        User entity = userDao.view(id, session);
         if (entity != null) {
+            UserDto dto = new UserDto();
             dto.setId(dto.getId());
             dto.setPassword(dto.getPassword());
             dto.setPasswordHint(dto.getPasswordHint());
