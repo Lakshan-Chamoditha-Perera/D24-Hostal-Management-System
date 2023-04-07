@@ -21,8 +21,8 @@ public class ReservationServiceImpl implements ReservationService {
     private final RoomDao roomDao;
 
     public ReservationServiceImpl() {
-        reservationDao = DaoFactory.getDaoFactory().getDao(DaoTypes.ReservationDao);
-        roomDao = DaoFactory.getDaoFactory().getDao(DaoTypes.RoomDao);
+        reservationDao = DaoFactory.getInstance().getDao(DaoTypes.ReservationDao);
+        roomDao = DaoFactory.getInstance().getDao(DaoTypes.RoomDao);
     }
 
     @Override
@@ -42,7 +42,17 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Boolean update(ReservationDto dto) {
-        return null;
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.getTransaction();
+        try (session) {
+            transaction.begin();
+            reservationDao.update(Converter.getInstance().toReservationEntity(dto), session);
+            transaction.commit();
+            return true;
+        } catch (RuntimeException exception) {
+            transaction.rollback();
+            throw new RuntimeException(exception.getMessage());
+        }
     }
 
     @Override
@@ -53,7 +63,7 @@ public class ReservationServiceImpl implements ReservationService {
             transaction.begin();
             reservationDao.delete(Converter.getInstance().toReservationEntity(dto), session);
             transaction.commit();
-            return Boolean.TRUE;
+            return true;
         } catch (RuntimeException exception) {
             transaction.rollback();
             throw new RuntimeException(exception);
@@ -61,8 +71,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationDto view(ReservationDto dto) {
-        return null;
+    public ReservationDto view(String id) {
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+//        Transaction transaction = session.getTransaction();
+        try (session) {
+            return Converter.getInstance().toReservationDto(reservationDao.view(Converter.getInstance().toReservationEntity(dto), session));
+        } catch (RuntimeException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override

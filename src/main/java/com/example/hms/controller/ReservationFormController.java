@@ -101,18 +101,23 @@ public class ReservationFormController implements Initializable {
 
     @FXML
     void btnAddReservationOnAction(ActionEvent event) throws IOException {
-        pane.setDisable(true);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setAlwaysOnTop(true);
-        //    stage.requestFocus();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/AddReservationForm.fxml"))));
-        stage.setTitle("Booking");
-        stage.showAndWait();
-        pane.setDisable(false);
+        try {
+            pane.setDisable(true);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setAlwaysOnTop(true);
+            stage.requestFocus();
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/AddReservationForm.fxml"))));
+            stage.setTitle("Booking");
+            stage.showAndWait();
+            pane.setDisable(false);
 
-        refreshRoomTable();
-        refreshReservationTable();
+            refreshRoomTable();
+            refreshReservationTable();
+        } catch (RuntimeException exception) {
+            new Alert(Alert.AlertType.INFORMATION, exception.getMessage()).show();
+
+        }
     }
 
     @FXML
@@ -125,10 +130,9 @@ public class ReservationFormController implements Initializable {
         ReservationTm reservationTm = tblReservations.getSelectionModel().getSelectedItem();
         if (reservationTm != null) {
             btnDelete.setDisable(false);
-
             ReservationDto reservationDto = new ReservationDto();
             reservationDto.setRes_id(reservationTm.getRes_id());
-            //   reservationService.delete(reservationDto, FactoryConfiguration.getFactoryConfiguration().getSession());
+//            reservationService.delete(reservationDto);
             //   new Alert(Alert.AlertType.ERROR, "Reservation Deleted").show();
         } else {
             new Alert(Alert.AlertType.ERROR, "Select Item First").show();
@@ -193,7 +197,20 @@ public class ReservationFormController implements Initializable {
     }
 
     public void btnMarkAsPaidOnAction(ActionEvent actionEvent) {
-
+        try {
+            ReservationTm selectedItem = tblReservations.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                ReservationDto reservationDto = new ReservationDto();
+                reservationDto.setRes_id(selectedItem.getRes_id());
+                ReservationDto dto = reservationService.view(reservationDto);
+                dto.setStatus("paid");
+                reservationService.update(dto);
+                new Alert(Alert.AlertType.INFORMATION, "Payment updated").show();
+            }
+        } catch (RuntimeException exception) {
+            exception.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+        }
     }
 
     public void btnViewUnpaidStudentOnAction(ActionEvent actionEvent) throws IOException {

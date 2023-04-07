@@ -29,9 +29,9 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Student view(Student entity, Session session) throws RuntimeException {
+    public Student view(String id, Session session) throws RuntimeException {
         try (session) {
-            return session.get(Student.class, entity.getStudent_id());
+            return session.get(Student.class, id);
         }
     }
 

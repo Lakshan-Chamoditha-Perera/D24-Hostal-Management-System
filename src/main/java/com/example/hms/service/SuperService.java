@@ -13,7 +13,7 @@ public interface SuperService<T extends SuperDto> {
 
     Boolean delete(T entity);
 
-    T view(T entity) throws RuntimeException;
+    T view(String id) throws RuntimeException;
 
     List<T> getAll();
     String getLastId();

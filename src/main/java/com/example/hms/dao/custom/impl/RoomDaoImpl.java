@@ -28,9 +28,9 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public Room view(Room entity, Session session) {
+    public Room view(String id, Session session) {
         try (session) {
-            return session.get(Room.class, entity.getRoom_type_id());
+            return session.get(Room.class, id);
         }
     }
 

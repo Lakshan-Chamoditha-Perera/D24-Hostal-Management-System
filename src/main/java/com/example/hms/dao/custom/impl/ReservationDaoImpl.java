@@ -18,46 +18,34 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public Boolean update(Reservation entity, Session session) {
-        Transaction transaction = session.getTransaction();
-        try (session) {
-            transaction.begin();
-            session.update(entity);
-            transaction.commit();
-            return true;
-        } catch (RuntimeException exception) {
-            transaction.rollback();
-            throw new RuntimeException(exception);
-        }
-    }
-
-    @Override
-    public Boolean delete(Reservation entity, Session session) {
-        session.delete(entity);
+        session.update(entity);
         return true;
     }
 
     @Override
-    public Reservation view(Reservation entity, Session session) {
-        return null;
+    public Boolean delete(Reservation entity, Session session) {
+        session.delete(entity.getRes_id(),Reservation.class);
+        return true;
+    }
+
+    @Override
+    public Reservation view(String id, Session session) {
+        return session.get(Reservation.class,id);
     }
 
     @Override
     public List<Reservation> getAll(Session session) {
-        try (session) {
-            String sql = "From Reservation";
-            Query query = session.createQuery(sql);
-            List<Reservation> list = query.list();
-            return list;
-        }
+        String sql = "From Reservation";
+        Query query = session.createQuery(sql);
+        List<Reservation> list = query.list();
+        return list;
     }
 
     @Override
     public String getLastId(Session session) {
-        try (session) {
-            Query query = session.createQuery("SELECT res_id FROM Reservation ORDER BY res_id DESC");
-            query.setMaxResults(1);
-            List results = query.list();
-            return (results.size() == 0) ? null : (String) results.get(0);
-        }
+        Query query = session.createQuery("SELECT res_id FROM Reservation ORDER BY res_id DESC");
+        query.setMaxResults(1);
+        List results = query.list();
+        return (results.size() == 0) ? null : (String) results.get(0);
     }
 }

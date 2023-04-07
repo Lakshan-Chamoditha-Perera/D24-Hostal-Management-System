@@ -55,32 +55,28 @@ public class DashboardController implements Initializable {
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) throws IOException {
-        new Bounce(btnLogout).play();
         NavigationFactory.getInstance().navigate(NavigationType.LOGIN, mainPane);
     }
 
     @FXML
     void btnReservationOnAction(ActionEvent event) throws IOException {
-      new Bounce(btnReservation).play();
+
         NavigationFactory.getInstance().navigate(NavigationType.RESERVATION, pane);
 
     }
 
     @FXML
     void btnRoomsOnAction(ActionEvent event) throws IOException {
-        new Bounce(btnRooms).play();
         NavigationFactory.getInstance().navigate(NavigationType.ROOM, pane);
     }
 
     @FXML
     void btnStudentsOnAction(ActionEvent event) throws IOException {
-        new Bounce(btnStudents).play();
         NavigationFactory.getInstance().navigate(NavigationType.STUDENT, pane);
     }
 
     @FXML
     void btnUserOnAction(ActionEvent event) throws IOException {
-        new Bounce(btnUser).play();
         NavigationFactory.getInstance().navigate(NavigationType.USER, pane);
     }
 
@@ -89,15 +85,5 @@ public class DashboardController implements Initializable {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> lblTime.setText("" + new SimpleDateFormat("EEEE - MMM-dd-yyyy  HH:mm:ss").format(Calendar.getInstance().getTime()))), new KeyFrame(Duration.seconds(1)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
-
-//        try {
-//            TextField txtId = (TextField) new Scene(FXMLLoader.load(getClass().getResource("../view/LoginPage.fxml"))).lookup("txtId");
-//            System.out.println(txtId.getText());
-//        } catch (IOException e) {
-////            throw new RuntimeException(e);
-//            e.printStackTrace();
-//        }
-
     }
 }

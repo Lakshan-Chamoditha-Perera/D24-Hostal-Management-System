@@ -42,6 +42,7 @@ public class Converter {
     }
 
     public Student toStudentEntity(StudentDto dto) {
+        System.out.println(dto);
         Student studentEntity = new Student();
         studentEntity.setStudent_id(dto.getStudent_id());
         studentEntity.setName(dto.getName());
@@ -71,6 +72,7 @@ public class Converter {
     }
 
     public Reservation toReservationEntity(ReservationDto dto) {
+        System.out.println(dto);
         Reservation entity = new Reservation();
         entity.setRes_id(dto.getRes_id());
         entity.setStudent(toStudentEntity(dto.getStudentDto()));

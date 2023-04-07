@@ -28,7 +28,7 @@ public class ServiceFactory {
             case UserService:
                 return (T) new UserServiceImpl();
             default:
-                throw new ServiceNotFountException();
+                throw new ServiceNotFountException("Service not found");
         }
     }
 }

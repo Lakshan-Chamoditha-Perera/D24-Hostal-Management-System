@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
     public UserServiceImpl() {
-        userDao = DaoFactory.getDaoFactory().getDao(DaoTypes.UserDao);
+        userDao = DaoFactory.getInstance().getDao(DaoTypes.UserDao);
     }
 
     @Override
@@ -81,11 +81,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto view(UserDto dto) throws RuntimeException {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-        User user = new User();
-        user.setId(dto.getId());
-
         User entity = userDao.view(user, session);
-
         if (entity != null) {
             dto.setId(dto.getId());
             dto.setPassword(dto.getPassword());

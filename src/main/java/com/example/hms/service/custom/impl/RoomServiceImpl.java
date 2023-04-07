@@ -18,7 +18,7 @@ public class RoomServiceImpl implements RoomService {
     private final RoomDao roomDao;
 
     public RoomServiceImpl() {
-        roomDao = DaoFactory.getDaoFactory().getDao(DaoTypes.RoomDao);
+        roomDao = DaoFactory.getInstance().getDao(DaoTypes.RoomDao);
     }
 
     @Override
@@ -67,9 +67,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto view(RoomDto dto) throws RuntimeException {
+    public RoomDto view(String id) throws RuntimeException {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-        Room entity = roomDao.view(Converter.getInstance().toRoomEntity(dto), session);
+        Room entity = roomDao.view(room, session);
         if (entity != null) {
             return Converter.getInstance().toRoomDto(entity);
         }

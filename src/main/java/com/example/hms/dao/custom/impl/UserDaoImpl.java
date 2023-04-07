@@ -27,9 +27,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User view(User entity, Session session) {
+    public User view(String id, Session session) {
         try (session) {
-            return session.get(User.class, entity.getId());
+            return session.get(User.class, id);
         }
     }
 

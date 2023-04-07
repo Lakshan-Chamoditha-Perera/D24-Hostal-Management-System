@@ -20,8 +20,8 @@ public class StudentServiceImpl implements StudentService {
     private final QueryDao queryDao;
 
     public StudentServiceImpl() {
-        studentDao = DaoFactory.getDaoFactory().getDao(DaoTypes.StudentsDao);
-        queryDao = DaoFactory.getDaoFactory().getDao(DaoTypes.QueryDao);
+        studentDao = DaoFactory.getInstance().getDao(DaoTypes.StudentsDao);
+        queryDao = DaoFactory.getInstance().getDao(DaoTypes.QueryDao);
     }
 
     @Override
@@ -73,11 +73,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDto view(StudentDto dto) {
+    public StudentDto view(String id) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        temp.setStudent_id(id);
         try (session) {
-            Student student = studentDao.view(Converter.getInstance().toStudentEntity(dto), session);
+            Student student = studentDao.view(temp, session);
             if (student != null) return Converter.getInstance().toStudentDto(student);
             throw new RuntimeException("Student not found");
         } catch (RuntimeException exception) {

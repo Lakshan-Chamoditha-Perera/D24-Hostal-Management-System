@@ -5,13 +5,13 @@ import com.example.hms.dao.util.DaoTypes;
 import com.example.hms.dao.util.exception.DaoNotFoundException;
 
 public class DaoFactory {
-    private static DaoFactory instance;
+    private static DaoFactory daoFactory;
 
     private DaoFactory() {
     }
 
-    public static DaoFactory getDaoFactory() {
-        return instance == null ? instance = new DaoFactory() : instance;
+    public static DaoFactory getInstance() {
+        return daoFactory == null ? daoFactory = new DaoFactory() : daoFactory;
     }
 
     public <T extends SuperDao> T getDao(DaoTypes type) {
@@ -27,7 +27,7 @@ public class DaoFactory {
             case QueryDao:
                 return (T) new QueryDaoImpl();
             default:
-                throw new DaoNotFoundException();
+                throw new DaoNotFoundException("DAO not found");
         }
     }
 }

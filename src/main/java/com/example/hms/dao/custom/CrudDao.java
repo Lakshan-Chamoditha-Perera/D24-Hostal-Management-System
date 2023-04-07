@@ -13,7 +13,7 @@ public interface CrudDao<T extends SuperEntity> extends SuperDao {
 
     Boolean delete(T entity ,Session session);
 
-    T view(T entity,Session session);
+    T view(String id,Session session);
 
     List<T> getAll(Session session);
     String getLastId(Session session);

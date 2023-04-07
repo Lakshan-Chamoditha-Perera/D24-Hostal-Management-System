@@ -72,6 +72,7 @@ public class RoomFormController implements Initializable {
     void btnAddOnAction(ActionEvent event) {
         try {
             if (validateData()) {
+
                 RoomDto roomDto = new RoomDto();
                 roomDto.setRoom_type_id(txtId.getText());
                 roomDto.setType(txtType.getText());
