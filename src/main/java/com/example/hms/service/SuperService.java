@@ -11,7 +11,7 @@ public interface SuperService<T extends SuperDto> {
 
     Boolean update(T entity);
 
-    Boolean delete(T entity);
+    Boolean delete(String id);
 
     T view(String id) throws RuntimeException;
 

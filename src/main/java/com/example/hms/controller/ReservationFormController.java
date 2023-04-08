@@ -7,7 +7,6 @@ import com.example.hms.service.custom.ReservationService;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.ServiceType;
 import com.example.hms.tm.ReservationTm;
-import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.NavigationFactory;
 import com.example.hms.util.navigation.NavigationType;
 import com.jfoenix.controls.JFXButton;
@@ -116,7 +115,6 @@ public class ReservationFormController implements Initializable {
             refreshReservationTable();
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.INFORMATION, exception.getMessage()).show();
-
         }
     }
 
@@ -127,17 +125,21 @@ public class ReservationFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        ReservationTm reservationTm = tblReservations.getSelectionModel().getSelectedItem();
-        if (reservationTm != null) {
-            btnDelete.setDisable(false);
-            ReservationDto reservationDto = new ReservationDto();
-            reservationDto.setRes_id(reservationTm.getRes_id());
-//            reservationService.delete(reservationDto);
-            //   new Alert(Alert.AlertType.ERROR, "Reservation Deleted").show();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Select Item First").show();
+        try {
+            ReservationTm reservationTm = tblReservations.getSelectionModel().getSelectedItem();
+            if (reservationTm != null) {
+                btnDelete.setDisable(false);
+                reservationService.delete(reservationTm.getRes_id());
+                new Alert(Alert.AlertType.ERROR, "Reservation Deleted : " + reservationTm.getRes_id()).show();
+                refreshRoomTable();
+                refreshReservationTable();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Select Item First").show();
+            }
+            btnDelete.setDisable(true);
+        } catch (RuntimeException exception) {
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
         }
-        btnDelete.setDisable(true);
 
     }
 
@@ -153,9 +155,7 @@ public class ReservationFormController implements Initializable {
 
     public void tblReservationsOnMouseClicked(MouseEvent mouseEvent) {
         ReservationTm reservationTm = tblReservations.getSelectionModel().getSelectedItem();
-        if (reservationTm != null) {
-            btnDelete.setDisable(false);
-        }
+        if (reservationTm != null) btnDelete.setDisable(false);
     }
 
     @Override

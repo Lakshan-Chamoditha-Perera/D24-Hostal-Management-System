@@ -62,14 +62,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean delete(UserDto dto) throws RuntimeException {
+    public Boolean delete(String id) throws RuntimeException {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
-        User user = new User();
-        user.setId(dto.getId());
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
-            userDao.delete(user, session);
+            userDao.delete(id, session);
             transaction.commit();
             return true;
         } catch (RuntimeException exception) {
@@ -84,9 +82,9 @@ public class UserServiceImpl implements UserService {
         User entity = userDao.view(id, session);
         if (entity != null) {
             UserDto dto = new UserDto();
-            dto.setId(dto.getId());
-            dto.setPassword(dto.getPassword());
-            dto.setPasswordHint(dto.getPasswordHint());
+            dto.setId(entity.getId());
+            dto.setPassword(entity.getPassword());
+            dto.setPasswordHint(entity.getPasswordHint());
             return dto;
         }
         throw new RuntimeException("User Not Found !");

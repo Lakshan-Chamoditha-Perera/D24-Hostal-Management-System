@@ -5,7 +5,6 @@ import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.util.ServiceType;
 import com.example.hms.tm.RoomTm;
-import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.regex.RegExFactory;
 import com.example.hms.util.regex.RegExType;
 import com.jfoenix.controls.JFXButton;
@@ -72,14 +71,13 @@ public class RoomFormController implements Initializable {
     void btnAddOnAction(ActionEvent event) {
         try {
             if (validateData()) {
-
                 RoomDto roomDto = new RoomDto();
                 roomDto.setRoom_type_id(txtId.getText());
                 roomDto.setType(txtType.getText());
                 roomDto.setKey_money(Double.valueOf(txtKeyMoney.getText()));
                 roomDto.setQty(Integer.valueOf(txtQty.getText()));
-
                 roomService.save(roomDto);
+
                 new Alert(Alert.AlertType.INFORMATION, "Room Added").show();
 
                 refreshTable();
@@ -93,7 +91,6 @@ public class RoomFormController implements Initializable {
         }
 
     }
-
     private void clearAll() {
         txtQty.clear();
         txtType.clear();
@@ -108,10 +105,7 @@ public class RoomFormController implements Initializable {
     void btnDeleteOnAction(ActionEvent event) {
         try {
             if (tblRooms.getSelectionModel().getSelectedItem() != null) {
-                RoomDto roomDto = new RoomDto();
-                roomDto.setRoom_type_id(txtId.getText());
-
-                roomService.delete(roomDto);
+                roomService.delete(txtId.getText());
                 new Alert(Alert.AlertType.INFORMATION, "Room Deleted").show();
 
                 refreshTable();
@@ -188,7 +182,7 @@ public class RoomFormController implements Initializable {
             txtId.setText(roomService.getLastId());
             List<RoomDto> all = roomService.getAll();
             ObservableList<RoomTm> roomObservableList = FXCollections.observableArrayList();
-            all.stream().forEach(dto -> roomObservableList.add(new RoomTm(dto.getRoom_type_id(), dto.getType(), dto.getKey_money(), dto.getQty())));
+            all.forEach(dto -> roomObservableList.add(new RoomTm(dto.getRoom_type_id(), dto.getType(), dto.getKey_money(), dto.getQty())));
             tblRooms.setItems(roomObservableList);
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();

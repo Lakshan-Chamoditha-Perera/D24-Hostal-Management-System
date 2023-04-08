@@ -11,7 +11,7 @@ public interface CrudDao<T extends SuperEntity> extends SuperDao {
 
     Boolean update(T entity, Session session);
 
-    Boolean delete(T entity ,Session session);
+    Boolean delete(String id ,Session session);
 
     T view(String id,Session session);
 

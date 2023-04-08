@@ -5,7 +5,6 @@ import com.example.hms.dto.UserDto;
 import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.UserService;
 import com.example.hms.service.util.ServiceType;
-import com.example.hms.util.FactoryConfiguration;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -81,12 +81,39 @@ public class UserFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-
+        try {
+            UserDto selectedItem = tblUsers.getSelectionModel().getSelectedItem();
+            userService.delete(selectedItem.getId());
+            new Alert(Alert.AlertType.ERROR, "User Deleted").showAndWait();
+        } catch (RuntimeException exception) {
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+        }
+        tblUsers.getItems().clear();
+        btnAdd.setDisable(false);
+        refreshTable();
+        clear();
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-
+        try {
+            UserDto userDto = new UserDto();
+            userDto.setId(txtId.getText());
+            userDto.setPassword(txtPassword.getText());
+            userDto.setPasswordHint(txtPasswordHint.getText());
+            userService.update(userDto);
+            new Alert(Alert.AlertType.ERROR, "User Updated").showAndWait();
+        } catch (RuntimeException exception) {
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+        }
+        tblUsers.getItems().clear();
+        btnAdd.setDisable(false);
+        refreshTable();
+        clear();
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     @Override
@@ -111,5 +138,23 @@ public class UserFormController implements Initializable {
         }
     }
 
+    private void clear(){
+        txtId.clear();
+        txtPassword.clear();
+        txtPasswordHint.clear();
+    }
 
+
+    public void tblUsersOnMouseClicked(MouseEvent mouseEvent) {
+        UserDto selectedItem = tblUsers.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            btnAdd.setDisable(true);
+            btnDelete.setDisable(false);
+            btnUpdate.setDisable(false);
+
+            txtId.setText(selectedItem.getId());
+            txtPassword.setText(selectedItem.getPassword());
+            txtPasswordHint.setText(selectedItem.getPasswordHint());
+        }
+    }
 }

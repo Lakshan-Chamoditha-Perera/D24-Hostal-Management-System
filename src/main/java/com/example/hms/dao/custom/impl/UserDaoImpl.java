@@ -21,15 +21,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Boolean delete(User entity, Session session) throws RuntimeException {
-        session.delete(entity);
+    public Boolean delete(String id, Session session) throws RuntimeException {
+        User user = new User();
+        user.setId(id);
+        session.delete(user);
         return true;
     }
 
     @Override
     public User view(String id, Session session) {
         try (session) {
-            return session.get(User.class, id);
+            User user = session.get(User.class, id);
+            System.out.println(user);
+            return user;
         }
     }
 

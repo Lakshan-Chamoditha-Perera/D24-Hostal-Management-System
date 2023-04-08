@@ -65,6 +65,6 @@ public class NavigationFactory {
 
     private void init(String fileName) throws IOException {
         new FadeIn(panel).play();
-        panel.getChildren().add(FXMLLoader.load(getClass().getResource("../view/" + fileName)));
+        panel.getChildren().add(FXMLLoader.load(getClass().getResource("/com/example/hms/view/" + fileName)));
     }
 }

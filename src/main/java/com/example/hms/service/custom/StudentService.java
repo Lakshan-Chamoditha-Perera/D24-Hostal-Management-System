@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface StudentService extends SuperService <StudentDto> {
     List <StudentDto>getUnpaidStudents();
+    List<StudentDto>searchStudentByText(String text);
 }

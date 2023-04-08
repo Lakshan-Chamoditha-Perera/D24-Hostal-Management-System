@@ -1,6 +1,5 @@
 package com.example.hms.controller;
 
-import animatefx.animation.*;
 import com.example.hms.util.NavigationFactory;
 import com.example.hms.util.navigation.NavigationType;
 import com.jfoenix.controls.JFXButton;
@@ -11,11 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -79,20 +76,23 @@ public class DashboardController implements Initializable {
 
     @FXML
     void btnUserOnAction(ActionEvent event) throws IOException {
-
-        URL resource =getClass().getResource("../view/UserCredentialForm.fxml");
+        URL resource = getClass().getResource("/com/example/hms/view/UserCredentialForm.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
+        Parent parent = fxmlLoader.load();
         UserCredentialFormController controller = fxmlLoader.getController();
         controller.init(this);
-
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setAlwaysOnTop(true);
         stage.centerOnScreen();
-        stage.requestFocus();
-        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.setScene(new Scene(parent));
+        mainPane.setDisable(true);
         stage.showAndWait();
-//        NavigationFactory.getInstance().navigate(NavigationType.DASHBOARD, mainPane);
+        mainPane.setDisable(false);
+    }
+
+    public void navigate() throws IOException {
+        NavigationFactory.getInstance().navigate(NavigationType.USER, pane);
     }
 
     @Override

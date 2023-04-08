@@ -5,7 +5,6 @@ import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.StudentService;
 import com.example.hms.service.util.ServiceType;
 import com.example.hms.tm.StudentTm;
-import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.regex.RegExFactory;
 import com.example.hms.util.regex.RegExType;
 import com.jfoenix.controls.JFXButton;
@@ -23,7 +22,9 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class StudentFormController implements Initializable {
 
@@ -115,9 +116,7 @@ public class StudentFormController implements Initializable {
         StudentTm selectedItem = tblStudents.getSelectionModel().getSelectedItem();
         try {
             if (selectedItem != null) {
-                StudentDto studentDto = new StudentDto();
-                studentDto.setStudent_id(selectedItem.getStudent_id());
-                studentService.delete(studentDto);
+                studentService.delete(selectedItem.getStudent_id());
                 new Alert(Alert.AlertType.INFORMATION, "Student Deleted").show();
                 refreshTable();
                 clearAll();
@@ -126,6 +125,7 @@ public class StudentFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Select Student first!").show();
             }
         } catch (RuntimeException e) {
+            e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
         btnUpdate.setDisable(true);
@@ -177,12 +177,12 @@ public class StudentFormController implements Initializable {
     @FXML
     void txtSearchOnAction(ActionEvent event) {
         if (RegExFactory.getInstance().getPattern(RegExType.STUDENT_ID).matcher(txtSearch.getText()).matches()) {
-
             StudentDto studentDto = new StudentDto();
             studentDto.setStudent_id(txtSearch.getText());
 //            studentService.view(studentDto, FactoryConfiguration.getFactoryConfiguration().getSession());
         }
     }
+
 
     @FXML
     void txtSearchOnKeyReleased(KeyEvent event) {
@@ -191,17 +191,38 @@ public class StudentFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        studentService = ServiceFactory.getServiceFactory().getService(ServiceType.StudentService);
+        try{
+            studentService = ServiceFactory.getServiceFactory().getService(ServiceType.StudentService);
 
-        colStudentId.setCellValueFactory(new PropertyValueFactory<>("student_id"));
-        colStudentName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colContact.setCellValueFactory(new PropertyValueFactory<>("contact_no"));
-        colDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
-        colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+            colStudentId.setCellValueFactory(new PropertyValueFactory<>("student_id"));
+            colStudentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            colContact.setCellValueFactory(new PropertyValueFactory<>("contact_no"));
+            colDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+            colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+            colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        refreshTable();
+            refreshTable();
 
+            txtSearch.textProperty().addListener((observableValue, previous, current) -> {
+                if (!Objects.equals(previous, current)) {
+                    tblStudents.getItems().clear();
+                    List<StudentTm> collect = studentService.searchStudentByText(current).stream().map(this::toStudentTm).collect(Collectors.toList());
+                    tblStudents.setItems(FXCollections.observableArrayList(collect));
+                }
+            });
+        }catch (RuntimeException exception){
+            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+        }
+    }
+
+    private StudentTm toStudentTm(StudentDto studentDto) {
+        StudentTm studentTm = new StudentTm();
+        studentTm.setStudent_id(studentDto.getStudent_id());
+        studentTm.setName(studentDto.getName());
+        studentTm.setDob(studentDto.getDob());
+        studentTm.setGender(studentDto.getGender());
+        studentTm.setAddress(studentDto.getAddress());
+        return studentTm;
     }
 
     private void refreshTable() {

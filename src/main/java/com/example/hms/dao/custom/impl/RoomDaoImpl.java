@@ -16,14 +16,14 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public Boolean update(Room entity, Session session)throws RuntimeException {
+    public Boolean update(Room entity, Session session) throws RuntimeException {
         session.update(entity);
         return true;
     }
 
     @Override
-    public Boolean delete(Room entity, Session session) {
-        session.delete(entity);
+    public Boolean delete(String id, Session session) {
+        session.delete(id, Room.class);
         return true;
     }
 

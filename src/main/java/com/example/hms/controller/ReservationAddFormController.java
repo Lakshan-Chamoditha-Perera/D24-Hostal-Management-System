@@ -8,7 +8,6 @@ import com.example.hms.service.custom.ReservationService;
 import com.example.hms.service.custom.RoomService;
 import com.example.hms.service.custom.StudentService;
 import com.example.hms.service.util.ServiceType;
-import com.example.hms.util.FactoryConfiguration;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.collections.FXCollections;
@@ -21,7 +20,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.hibernate.Session;
 
 import java.net.URL;
 import java.sql.Date;
@@ -83,7 +81,6 @@ public class ReservationAddFormController implements Initializable {
                 reservationDto.setRoomDto(dto);
 
                 reservationService.save(reservationDto);
-                //System.out.println(session.isConnected());
 
                 Stage stage = (Stage) floatingPane.getScene().getWindow();
                 stage.setAlwaysOnTop(false);
@@ -131,10 +128,9 @@ public class ReservationAddFormController implements Initializable {
         try {
             List<RoomDto> roomDtoList = roomService.getAll();
             ObservableList<String> roomIdObservableList = FXCollections.observableArrayList();
-            for (RoomDto room : roomDtoList) roomIdObservableList.add(room.getRoom_type_id());
+            roomDtoList.forEach(roomDto -> roomIdObservableList.add(roomDto.getRoom_type_id()));
             cmbRoomId.setItems(roomIdObservableList);
         } catch (RuntimeException ignored) {
-//
         }
     }
 
@@ -142,10 +138,9 @@ public class ReservationAddFormController implements Initializable {
         try {
             List<StudentDto> studentDtoList = studentService.getAll();
             ObservableList<String> studentIdObservableList = FXCollections.observableArrayList();
-            for (StudentDto studentDto : studentDtoList) studentIdObservableList.add(studentDto.getStudent_id());
+            studentDtoList.forEach(studentDto -> studentIdObservableList.add(studentDto.getStudent_id()));
             cmbStdId.setItems(studentIdObservableList);
         } catch (RuntimeException ignored) {
-//
         }
     }
 

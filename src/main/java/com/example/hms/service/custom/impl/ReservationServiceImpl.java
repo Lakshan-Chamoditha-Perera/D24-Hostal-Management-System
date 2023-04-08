@@ -56,12 +56,12 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Boolean delete(ReservationDto dto) {
+    public Boolean delete(String id) {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
-            reservationDao.delete(Converter.getInstance().toReservationEntity(dto), session);
+            reservationDao.delete(id, session);
             transaction.commit();
             return true;
         } catch (RuntimeException exception) {

@@ -3,6 +3,7 @@ package com.example.hms.dao.custom.impl;
 import com.example.hms.dao.custom.StudentDao;
 import com.example.hms.entity.Student;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -22,36 +23,40 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Boolean delete(Student entity, Session session) throws RuntimeException {
-        session.delete(entity);
+    public Boolean delete(String id, Session session) throws RuntimeException {
+        Student student = new Student();
+        student.setStudent_id(id);
+        session.delete(student);
+        System.out.println("Std Dao end");
         return true;
-
     }
 
     @Override
     public Student view(String id, Session session) throws RuntimeException {
-        try (session) {
-            return session.get(Student.class, id);
-        }
+        return session.get(Student.class, id);
     }
 
     @Override
     public List<Student> getAll(Session session) throws RuntimeException {
-        try (session) {
-            String sql = "FROM Student";
-            Query query = session.createQuery(sql);
-            List<Student> list = query.list();
-            return list;
-        }
+        String sql = "FROM Student";
+        Query query = session.createQuery(sql);
+        List<Student> list = query.list();
+        return list;
     }
 
     @Override
     public String getLastId(Session session) throws RuntimeException {
-        try (session) {
-            Query query = session.createQuery("SELECT student_id FROM Student ORDER BY student_id DESC");
-            query.setMaxResults(1);
-            List results = query.list();
-            return (results.size() == 0) ? null : (String) results.get(0);
-        }
+        Query query = session.createQuery("SELECT student_id FROM Student ORDER BY student_id DESC");
+        query.setMaxResults(1);
+        List results = query.list();
+        return (results.size() == 0) ? null : (String) results.get(0);
+    }
+
+    @Override
+    public List<Student> searchStudentByText(String text, Session session) {
+//        NativeQuery sqlQuery = session.createSQLQuery("SELECT * FROM Student WHERE name LIKE '%" + text+"%'");
+        Query query = session.createQuery("FROM Student  WHERE name LIKE '%" + text + "%'");
+        List<Student> list = query.list();
+        return list;
     }
 }

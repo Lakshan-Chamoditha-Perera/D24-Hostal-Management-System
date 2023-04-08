@@ -23,8 +23,10 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
-    public Boolean delete(Reservation entity, Session session) {
-        session.delete(entity.getRes_id(),Reservation.class);
+    public Boolean delete(String id, Session session) {
+        Reservation reservation = new Reservation();
+        reservation.setRes_id(id);
+        session.delete(reservation);
         return true;
     }
 

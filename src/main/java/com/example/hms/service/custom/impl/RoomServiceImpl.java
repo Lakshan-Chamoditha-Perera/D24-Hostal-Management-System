@@ -52,12 +52,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Boolean delete(RoomDto dto) throws RuntimeException {
+    public Boolean delete(String id) throws RuntimeException {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.getTransaction();
         try (session) {
             transaction.begin();
-            roomDao.delete(Converter.getInstance().toRoomEntity(dto), session);
+            roomDao.delete(id, session);
             transaction.commit();
             return true;
         } catch (RuntimeException exception) {
