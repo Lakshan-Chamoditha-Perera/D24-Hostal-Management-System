@@ -54,7 +54,6 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public List<Student> searchStudentByText(String text, Session session) {
-//        NativeQuery sqlQuery = session.createSQLQuery("SELECT * FROM Student WHERE name LIKE '%" + text+"%'");
         Query query = session.createQuery("FROM Student  WHERE name LIKE '%" + text + "%'");
         List<Student> list = query.list();
         return list;

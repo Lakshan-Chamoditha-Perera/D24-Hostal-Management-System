@@ -8,37 +8,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="807.0" prefWidth="1311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hms.controller.MainFormController">
+<AnchorPane fx:id="pane" prefHeight="807.0" prefWidth="1311.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.hms.controller.MainFormController">
     <children>
         <ImageView fitHeight="781.0" fitWidth="1282.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
             <image>
-                <Image url="@../assets/img_1.png" />
+                <Image url="@../assets/img_1.png"/>
             </image>
             <cursor>
-                <Cursor fx:constant="HAND" />
+                <Cursor fx:constant="HAND"/>
             </cursor>
         </ImageView>
-        <ImageView fitHeight="355.0" fitWidth="515.0" layoutX="276.0" layoutY="65.0" pickOnBounds="true">
+        <ImageView fitHeight="396.0" fitWidth="528.0" layoutX="243.0" layoutY="82.0" pickOnBounds="true">
             <image>
-                <Image url="@../assets/img.png" />
+                <Image url="@../assets/img.png"/>
             </image>
         </ImageView>
-        <Label layoutX="51.0" layoutY="307.0" prefHeight="143.0" prefWidth="383.0" text="D/24 ">
+        <Label layoutX="34.0" layoutY="345.0" prefHeight="143.0" prefWidth="383.0" text="D/24 ">
             <font>
-                <Font name="Loma Bold" size="96.0" />
+                <Font name="Loma Bold" size="96.0"/>
             </font>
         </Label>
-        <Label layoutX="53.0" layoutY="429.0" prefHeight="82.0" prefWidth="745.0" text="Hostel Management System">
+        <Label layoutX="36.0" layoutY="467.0" prefHeight="82.0" prefWidth="745.0" text="Hostel Management System">
             <font>
-                <Font name="Loma Bold" size="54.0" />
+                <Font name="Loma Bold" size="54.0"/>
             </font>
         </Label>
-        <JFXButton layoutX="53.0" layoutY="515.0" onAction="#onAction" prefHeight="52.0" prefWidth="278.0" style="-fx-background-color: #2F58CD;" text="Get Started" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXButton>
+        <JFXButton layoutX="36.0" layoutY="553.0" onAction="#onAction" prefHeight="52.0" prefWidth="278.0"
+                   style="-fx-background-color: #2F58CD; -fx-background-radius: 15;" text="Get Started"
+                   textFill="WHITE">
+            <font>
+                <Font size="24.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </JFXButton>
     </children>
 </AnchorPane>

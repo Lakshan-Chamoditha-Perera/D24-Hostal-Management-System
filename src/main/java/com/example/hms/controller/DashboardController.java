@@ -13,6 +13,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,35 +29,31 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
+    private final KeyCombination controlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+    private final KeyCombination controlR = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
+    private final KeyCombination controlE = new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN);
+    private final KeyCombination controlL = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
     @FXML
     private AnchorPane mainPane;
-
     @FXML
     private AnchorPane sidePane;
-
     @FXML
     private JFXButton btnLogout;
-
     @FXML
     private JFXButton btnStudents;
-
     @FXML
     private JFXButton btnRooms;
-
     @FXML
     private JFXButton btnReservation;
-
     @FXML
     private JFXButton btnUser;
-
     @FXML
     private AnchorPane pane;
-
     @FXML
     private Label lblTime;
 
     @FXML
-    void btnLogoutOnAction(ActionEvent event) throws IOException {
+    void btnLogoutOnAction() throws IOException {
         NavigationFactory.getInstance().navigate(NavigationType.LOGIN, mainPane);
     }
 
@@ -100,5 +99,31 @@ public class DashboardController implements Initializable {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> lblTime.setText("" + new SimpleDateFormat("EEEE - MMM-dd-yyyy  HH:mm:ss").format(Calendar.getInstance().getTime()))), new KeyFrame(Duration.seconds(1)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+//        sidePane.setOnKeyPressed(event -> {
+//            if (event.getCode() == KeyCode.S && event.isControlDown()) {
+//                btnStudents.fire();
+//            } else if (event.getCode() == KeyCode.R && event.isControlDown()) {
+//                btnRooms.fire();
+//            } else if (event.getCode() == KeyCode.E && event.isControlDown()) {
+//                btnReservation.fire();
+//            } else if (event.getCode() == KeyCode.L && event.isControlDown()) {
+//                btnLogout.fire();
+//            }
+//        });
+        sidePane.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case S:
+                    if (controlS.match(event)) btnStudents.fire();break;
+                case R:
+                    if (controlR.match(event)) btnRooms.fire();break;
+                case E:
+                    if (controlE.match(event)) btnReservation.fire();break;
+                case L:
+                    if (controlL.match(event)) btnLogout.fire() ;break;
+                default: break;
+            }
+        }); //shortcut keys
     }
+
+
 }

@@ -79,21 +79,6 @@ public class ReservationFormController implements Initializable {
     private JFXButton btnAddReservation;
 
     @FXML
-    private TextField txtName;
-
-    @FXML
-    private TextField txtAddress;
-
-    @FXML
-    private TextField txtContactNumber;
-
-    @FXML
-    private TextField txtGender;
-
-    @FXML
-    private JFXButton btnClear;
-
-    @FXML
     private JFXButton btnDelete;
     private RoomService roomService;
     private ReservationService reservationService;
@@ -119,11 +104,6 @@ public class ReservationFormController implements Initializable {
     }
 
     @FXML
-    void btnClearOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void btnDeleteOnAction(ActionEvent event) {
         try {
             ReservationTm reservationTm = tblReservations.getSelectionModel().getSelectedItem();
@@ -140,16 +120,6 @@ public class ReservationFormController implements Initializable {
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
         }
-
-    }
-
-    @FXML
-    void txtSearchByStudentIdOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtSearchByStudentIdOnKeyReleased(KeyEvent event) {
 
     }
 
@@ -204,6 +174,8 @@ public class ReservationFormController implements Initializable {
                 dto.setStatus("paid");
                 reservationService.update(dto);
                 new Alert(Alert.AlertType.INFORMATION, "Payment updated").show();
+                refreshReservationTable();
+                refreshRoomTable();
             }
         } catch (RuntimeException exception) {
             exception.printStackTrace();
