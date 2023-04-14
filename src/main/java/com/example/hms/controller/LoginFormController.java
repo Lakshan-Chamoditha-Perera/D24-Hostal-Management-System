@@ -1,11 +1,9 @@
 package com.example.hms.controller;
 
-import animatefx.animation.Pulse;
 import com.example.hms.dto.UserDto;
 import com.example.hms.service.ServiceFactory;
 import com.example.hms.service.custom.UserService;
 import com.example.hms.service.util.ServiceType;
-import com.example.hms.util.FactoryConfiguration;
 import com.example.hms.util.NavigationFactory;
 import com.example.hms.util.navigation.NavigationType;
 import com.example.hms.util.regex.RegExFactory;
@@ -47,13 +45,11 @@ public class LoginFormController implements Initializable {
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
-//       condition ->  checkRegEx()
-        if (true) {
+        if (checkRegEx()) {
             try {
                 UserDto dto = new UserDto(txtId.getText(), txtPassword.getText(), "hint");
-               // UserDto user = userService.view(dto, FactoryConfiguration.getFactoryConfiguration().getSession());
-//        condition -> user.getId().equals(txtId.getText()) && user.getPassword().equals(txtPassword.getText())
-                if (true) {
+                UserDto user = userService.view(dto.getId());
+                if (user.getId().equals(txtId.getText()) && user.getPassword().equals(txtPassword.getText())) {
                     NavigationFactory.getInstance().navigate(NavigationType.DASHBOARD, pane);
                 }
             } catch (RuntimeException | IOException exception) {
