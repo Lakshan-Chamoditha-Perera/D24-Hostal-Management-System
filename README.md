@@ -18,10 +18,23 @@ The D24 Hostel Management System is a comprehensive software solution designed t
 
 ## Technologies Used
 
-- **Front-end**: HTML, CSS, JavaScript, React.js
-- **Back-end**: Node.js, Express.js
+- **Front-end**: XML, FXML, CSS, JAVAFX
+- **Back-end**:Java
 - **Database**: MySQL
 - **ORM (Object-Relational Mapping)**: Hibernate
+
+## Configuration
+
+Configure the application by updating the necessary settings in the configuration files, such as the database connection details and system configurations. Update the Hibernate configuration settings in the application.properties file:
+
+hibernate.connection.driver_class=com.mysql.cj.jdbc.Driver
+hibernate.connection.url=jdbc:mysql://localhost:3306/hms
+hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+hibernate.connection.username=root
+hibernate.connection.password=#Shan0503
+hibernate.show_sql=true
+hibernate.format_sql=false
+hibernate.hbm2ddl.auto=update
 
 ## Design Patterns
 
@@ -30,6 +43,22 @@ The D24 Hostel Management System is a comprehensive software solution designed t
 - **Factory Pattern**: The `DaoFactory` class also demonstrates the Factory pattern by providing a factory method to create specific DAO implementations based on the requested type. It abstracts the creation logic and allows easy extension of DAO classes.
 
 - **Facade Pattern**: The system design incorporates the Facade pattern to provide a simplified interface for interacting with complex subsystems. The controller classes act as facades that encapsulate the business logic and interact with the DAO layer.
+
+## Keyboard Shortcuts
+
+The D24 Hostel Management System supports the following keyboard shortcuts:
+
+- **Navigate to Manage Students**: Press `Ctrl + S` to navigate to the Manage Students form.
+- **Navigate to Manage Rooms**: Press `Ctrl + R` to navigate to the Manage Rooms form.
+- **Navigate to Manage Reservations**: Press `Ctrl + E` to navigate to the Manage Reservations form.
+- **Logout**: Press `Ctrl + L` to logout from the system.
+
+Please note that these shortcuts can be used on the Dashboard page to perform quick actions without using the mouse.
+
+### Shortcut Key Handling
+
+The `sidePane.setOnKeyPressed` event handler listens for key presses and triggers the corresponding actions based on the pressed keys:
+
 
 ## Installation
 
