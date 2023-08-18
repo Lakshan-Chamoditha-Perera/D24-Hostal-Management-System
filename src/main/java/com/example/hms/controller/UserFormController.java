@@ -104,7 +104,7 @@ public class UserFormController implements Initializable {
             userDto.setPassword(txtPassword.getText());
             userDto.setPasswordHint(txtPasswordHint.getText());
             userService.update(userDto);
-            new Alert(Alert.AlertType.ERROR, "User Updated").showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, "User Updated").showAndWait();
         } catch (RuntimeException exception) {
             new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
         }

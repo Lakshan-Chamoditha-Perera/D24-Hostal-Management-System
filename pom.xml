@@ -6,7 +6,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>hms</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>hms</name>
 
     <properties>
@@ -27,18 +27,18 @@
             <version>2.7.7</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
-        <dependency>
+       <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
             <version>1.11.20</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml/classmate -->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.fasterxml/classmate -->
         <dependency>
             <groupId>com.fasterxml</groupId>
             <artifactId>classmate</artifactId>
             <version>1.5.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.sun.xml.fastinfoset/FastInfoset -->
+<!--         https://mvnrepository.com/artifact/com.sun.xml.fastinfoset/FastInfoset -->
         <dependency>
             <groupId>com.sun.xml.fastinfoset</groupId>
             <artifactId>FastInfoset</artifactId>
@@ -57,12 +57,12 @@
             <version>5.6.0.Final</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.sun.istack/istack-commons-runtime -->
-        <dependency>
+       <dependency>
             <groupId>com.sun.istack</groupId>
             <artifactId>istack-commons-runtime</artifactId>
             <version>3.0.7</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jboss/jandex -->
+        <!-- https://mvnrepository.com/artifact/org.jboss/jandex-->
         <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jandex</artifactId>
@@ -92,7 +92,7 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>2.3.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+         <!--https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
@@ -136,7 +136,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.30</version>
+            <version>8.0.32</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
         <dependency>
